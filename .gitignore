@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+# Vscode
+c_cpp_properties.json
+settings.json
+
+# Directories
+build/*
+external_libs/*
+BinaryGenerator/output_files

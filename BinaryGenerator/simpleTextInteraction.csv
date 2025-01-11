@@ -1,0 +1,10 @@
+0;1;2;RED is playing the SNES!;...Okay! It's time to go!
+1;1;2;RED lose the SNES!;...Okay! It's time to go!
+2;1;2;RED Thief the SNES!;...Okay! It's time to go!
+3;2;2;RED now playing the SNES!;...is not Okay! It's not time to go!
+4;3;1;Do you want go to the gym?;0;1
+5;4;1;Chose a color;1;2;3;4
+6;5;2;Hello;...Im pino;6
+7;6;3;gino;..vuole il tuo sangue;Ti morde!;bleeding
+8;7;1;apri;255
+9;8;1;hai vinto l'incontro;678;677
