@@ -6,6 +6,7 @@ class NPC : public Entity {
     std::vector<utils::Coordinate> boundaries;
     uint8_t directions;
     uint32_t next_entity_ID[2];
+    uint8_t movement_possibilities_;
 
    public:
     NPC();
@@ -22,4 +23,8 @@ class NPC : public Entity {
     void setBoundaries(const std::vector<utils::Coordinate> boundaries);
     void setDirections(const uint8_t& directions);
     void setNextEntityID(uint32_t ID, uint8_t index);
+
+    void calculateMovement() override;
+    void executeMovement() override;
+
 };
