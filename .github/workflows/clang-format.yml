@@ -1,0 +1,52 @@
+name: Auto-format source code
+
+on: [push]
+
+jobs:
+  clang-format:
+    name: Auto-format source code
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    environment: ${{ github.actor }}_environment
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - name: Set up Clang-Format
+        run: sudo apt-get install -y clang-format
+
+      - name: Cache clang image
+        id: cache-clang-formatter
+        uses: actions/cache@v4
+        with:
+          path: .github/build-caching
+          key: ${{ runner.os }}-clang-formatter
+
+      - name: Format source code
+        run: clang-format -i game/**/*.cpp game/**/*.hpp --ferror-limit=0 --style file:.clang-format --verbose
+
+      - name: Format tests
+        run: clang-format -i tests/**/*.cpp tests/**/*.hpp --ferror-limit=0 --style file:.clang-format --verbose
+
+      - name: Check for modifications
+        id: check_modifications
+        run: |
+          git diff --exit-code > /dev/null || echo "modified=true" >> $GITHUB_ENV
+
+      - name: Commit and push changes
+        if: env.modified == 'true'
+        run: |
+          git config --global user.email "${{ github.event.commits[0].author.email }}"
+          git config --global user.name "${{ github.event.commits[0].author.name }}"
+          git commit -a -m "Autoformat code"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
