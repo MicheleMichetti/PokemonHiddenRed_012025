@@ -9,7 +9,7 @@
 
 using tileArray = boost::multi_array<Tile, 2>;
 using entityCoordinates = std::pair<uint16_t, uint16_t>;
-using entityMap = std::map<entityCoordinates, Entity>;
+using entityMap = std::map<entityCoordinates, Entity*>;
 
 class Map {
    private:
@@ -22,7 +22,9 @@ class Map {
     entityMap entities_;
 
    public:
-    Map();
+    explicit Map();
+    Map(const Map&) = delete;
+    Map& operator=(const Map&) = delete;
     Map(const uint16_t& id, const uint8_t& type, const std::string& map_name, const tileArray& tiles, const uint16_t& length_x, const uint16_t& length_y, const entityMap& entities);
     ~Map();
 
@@ -42,7 +44,7 @@ class Map {
     const tileArray getTiles();
     const entityMap getEntities();
 
-    entityCoordinates setCoordinates(const utils::Coordinate& coord);
+    entityCoordinates setCoordinates(const utils::Coordinate& coord) const;
 
     void swapTiles(Tile& tile_1, Tile& tile_2);
     void setTile(const utils::Coordinate& coordinate, const Tile& tile);
@@ -52,13 +54,14 @@ class Map {
     bool doesItCollide(const utils::Coordinate& coordinate, const uint8_t& direction);
     bool doesItInteract(const utils::Coordinate& coordinate, const uint8_t& direction);
 
-    void loadEntity(const utils::Coordinate& coord, const Entity& entity);
-    void replaceEntity(const utils::Coordinate& coordinate, const Entity& entity);
-    void loadNextEntity(const NPC& entity);
-    void loadEntities(const std::vector<utils::Coordinate>& coord, const std::vector<Entity>& entities);
+    void loadEntity(const utils::Coordinate& coord, Entity* entity);
+    void replaceEntity(const utils::Coordinate& coordinate, Entity* entity);
+    void loadNextEntity(const Entity* entity);
+    void loadEntities(const std::vector<utils::Coordinate>& coord, Entity* entities);
+    void updateEntityInteraction(const utils::Coordinate& coord, const InteractionEntity &inter);
+    void evaluateEntitiesMovement();
+
     void startEntitiesMovementThread();
     void stopEntitiesMovementThread();
 
-    bool isPokemonBattleTriggered();
-    bool isTrainerBattleTriggered();
 };
