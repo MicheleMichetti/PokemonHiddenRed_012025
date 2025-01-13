@@ -1,7 +1,7 @@
 #include <spdlog/spdlog.h>
-#include <thread>
 
 #include <Map.hpp>
+#include <thread>
 
 Map::Map() {
     this->id_ = 0;
@@ -21,9 +21,7 @@ Map::Map(const uint16_t& id, const uint8_t& type, const std::string& map_name, c
     this->entities_ = entities;
 }
 
-Map::~Map() {
-    entities_.clear();
-}
+Map::~Map() { entities_.clear(); }
 
 void Map::setId(const uint16_t& id) { this->id_ = id; }
 void Map::setType(const uint8_t& type) { this->type_ = type; }
@@ -76,7 +74,7 @@ void Map::loadEntity(const utils::Coordinate& coord, Entity* entity) {
         // throw std::invalid_argument(("At x="+coordinate.x+" and y="+coordinate.y+" there is already an entity on map "+id_+".").c_str());
         return;
     }
-    //entityCoordinates ent_coord = setCoordinates(coord);//std::make_pair(coord.x, coord.y);
+    // entityCoordinates ent_coord = setCoordinates(coord);//std::make_pair(coord.x, coord.y);
     std::pair _argument1 = std::make_pair(setCoordinates(coord), entity);
     entities_.insert(_argument1);
 }
@@ -101,21 +99,16 @@ void Map::loadNextEntity(const Entity* entity) {
 
 void Map::loadEntities(const std::vector<utils::Coordinate>& coord, Entity* entities) {
     for (uint16_t entry_num = 0; entry_num < coord.size(); ++entry_num) {
-        
         loadEntity(coord[entry_num], &(entities[entry_num]));
     }
-    
 }
 
-void Map::updateEntityInteraction(const utils::Coordinate& coord, const InteractionEntity &inter) {
-    entities_.at(setCoordinates(coord))->setInteraction(inter);
-
-}
+void Map::updateEntityInteraction(const utils::Coordinate& coord, const InteractionEntity& inter) { entities_.at(setCoordinates(coord))->setInteraction(inter); }
 
 void Map::evaluateEntitiesMovement() {
     entityMap::iterator it = entities_.begin();
-    for(; it != entities_.end(); ++it) {
-        if(it->second->getType() > 2) {
+    for (; it != entities_.end(); ++it) {
+        if (it->second->getType() > 2) {
             continue;
         }
         it->second->calculateMovement();
@@ -123,8 +116,7 @@ void Map::evaluateEntitiesMovement() {
 }
 
 void Map::startEntitiesMovementThread() {
-    std::thread evaluateMovementThread ([this]() { this->evaluateEntitiesMovement(); });
+    std::thread evaluateMovementThread([this]() { this->evaluateEntitiesMovement(); });
     evaluateMovementThread.detach();
-    
 }
 void Map::stopEntitiesMovementThread() {}

@@ -20,37 +20,17 @@ Entity::Entity(uint32_t id, uint8_t type, std::string name, _movement::Movement 
     this->interaction_ = interaction;
 }
 
-void Entity::setID(uint32_t id) {
-    this->id_ = id;
-}
-void Entity::setType(uint8_t type) {
-    this->type_ = type;
-}
-void Entity::setName(std::string name) {
-    this->name_ = name;
-}
-void Entity::setMovement(_movement::Movement movement) {
-    this->movement_ = movement;
-}
-void Entity::setInteraction(InteractionEntity interaction) {
-    this->interaction_ = interaction;
-}
+void Entity::setID(uint32_t id) { this->id_ = id; }
+void Entity::setType(uint8_t type) { this->type_ = type; }
+void Entity::setName(std::string name) { this->name_ = name; }
+void Entity::setMovement(_movement::Movement movement) { this->movement_ = movement; }
+void Entity::setInteraction(InteractionEntity interaction) { this->interaction_ = interaction; }
 
-uint32_t Entity::getID() {
-    return id_;
-}
-uint8_t Entity::getType() {
-    return type_;
-}
-std::string Entity::getName() {
-    return name_;
-}
-_movement::Movement Entity::getMovement() {
-    return movement_;
-}
-InteractionEntity Entity::getInteraction() {
-    return interaction_;
-}
+uint32_t Entity::getID() { return id_; }
+uint8_t Entity::getType() { return type_; }
+std::string Entity::getName() { return name_; }
+_movement::Movement Entity::getMovement() { return movement_; }
+InteractionEntity Entity::getInteraction() { return interaction_; }
 
 void Entity::EntityErrorMessage(const char* c) {
     SPDLOG_ERROR(c);

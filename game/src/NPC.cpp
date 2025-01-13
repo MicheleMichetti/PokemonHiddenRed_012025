@@ -29,12 +29,11 @@ void NPC::setDirections(const uint8_t& directions) { this->directions = directio
 void NPC::setNextEntityID(uint32_t ID, uint8_t index) { this->next_entity_ID[index]; }
 
 void NPC::calculateMovement() {
-        
     uint8_t total_choices = 0;
-    for(uint8_t index = 0; index <8; ++index) {
+    for (uint8_t index = 0; index < 8; ++index) {
         total_choices += utils::readBit<uint8_t>(index, movement_possibilities_);
     }
-    if (total_choices == 0 || (total_choices == 1 && boundaries.size() > 0) ) {
+    if (total_choices == 0 || (total_choices == 1 && boundaries.size() > 0)) {
         EntityErrorMessage("Data for movement are erroneous.");
         return;
     }
@@ -42,30 +41,29 @@ void NPC::calculateMovement() {
         return;
     }
 
-    int8_t pick = (int8_t)((double)std::rand()/(double)RAND_MAX*(double)total_choices);
+    int8_t pick = (int8_t)((double)std::rand() / (double)RAND_MAX * (double)total_choices);
     uint8_t index = 0;
-    for(; index < 4; ++index) {
-        
-        if(utils::readBit<uint8_t>(index, movement_possibilities_)) {
+    for (; index < 4; ++index) {
+        if (utils::readBit<uint8_t>(index, movement_possibilities_)) {
             pick--;
         }
-        if(pick<1) {
+        if (pick < 1) {
             movement_possibilities_ = 0;
-            utils::setBit<uint8_t>(movement_possibilities_,index);
+            utils::setBit<uint8_t>(movement_possibilities_, index);
             movement_.setFutureDirection(movement_possibilities_);
             return;
         }
     }
-    for(; index < 8; ++index) {
-        if(utils::readBit<uint8_t>(index, movement_possibilities_)) {
+    for (; index < 8; ++index) {
+        if (utils::readBit<uint8_t>(index, movement_possibilities_)) {
             pick--;
         }
-        if(pick<1) {
+        if (pick < 1) {
             break;
         }
     }
-    
-    switch(index) {
+
+    switch (index) {
         case 4:
             movement_.moveUp();
             break;
@@ -81,9 +79,6 @@ void NPC::calculateMovement() {
         default:
             break;
     }
-
 }
 
-void NPC::executeMovement() {
-    movement_.updateStatus();
-}
+void NPC::executeMovement() { movement_.updateStatus(); }
