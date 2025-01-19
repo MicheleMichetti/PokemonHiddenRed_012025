@@ -19,21 +19,21 @@ class Movement {
 
     void setCoordinate(utils::Coordinate coordinate);
     void setDirection(uint8_t direction);
-    void setX(int16_t x);
-    void setY(int16_t y);
+    void setX(COORDINATE_TYPE x);
+    void setY(COORDINATE_TYPE y);
     void setFutureCoordinate(utils::Coordinate coordinate);
     void setFutureDirection(uint8_t direction);
-    void setFutureX(int16_t x);
-    void setFutureY(int16_t y);
+    void setFutureX(COORDINATE_TYPE x);
+    void setFutureY(COORDINATE_TYPE y);
 
-    utils::Coordinate getCoordinate();
-    uint8_t getDirection();
-    int16_t getX();
-    int16_t getY();
-    utils::Coordinate getFutureCoordinate();
-    uint8_t getFutureDirection();
-    int16_t getFutureX();
-    int16_t getFutureY();
+    const utils::Coordinate getCoordinate();
+    const uint8_t getDirection();
+    const COORDINATE_TYPE getX();
+    const COORDINATE_TYPE getY();
+    const utils::Coordinate getFutureCoordinate();
+    const uint8_t getFutureDirection();
+    const COORDINATE_TYPE getFutureX();
+    const COORDINATE_TYPE getFutureY();
 
     void moveUp();
     void moveDown();

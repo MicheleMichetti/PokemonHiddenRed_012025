@@ -37,24 +37,24 @@ void Movement::setCoordinate(utils::Coordinate coordinate) {
     setY(coordinate.y);
 }
 void Movement::setDirection(uint8_t direction) { direction_ = direction; }
-void Movement::setX(int16_t X) { coordinate_.x = X; }
-void Movement::setY(int16_t Y) { coordinate_.y = Y; }
+void Movement::setX(COORDINATE_TYPE X) { coordinate_.x = X; }
+void Movement::setY(COORDINATE_TYPE Y) { coordinate_.y = Y; }
 void Movement::setFutureCoordinate(utils::Coordinate coordinate) {
     setFutureX(coordinate.x);
     setFutureY(coordinate.y);
 }
 void Movement::setFutureDirection(uint8_t direction) { future_direction_ = direction; }
-void Movement::setFutureX(int16_t X) { future_coordinate_.x = X; }
-void Movement::setFutureY(int16_t Y) { future_coordinate_.y = Y; }
+void Movement::setFutureX(COORDINATE_TYPE X) { future_coordinate_.x = X; }
+void Movement::setFutureY(COORDINATE_TYPE Y) { future_coordinate_.y = Y; }
 
-utils::Coordinate Movement::getCoordinate() { return coordinate_; }
-uint8_t Movement::getDirection() { return direction_; }
-int16_t Movement::getX() { return coordinate_.x; }
-int16_t Movement::getY() { return coordinate_.y; }
-utils::Coordinate Movement::getFutureCoordinate() { return future_coordinate_; }
-uint8_t Movement::getFutureDirection() { return future_direction_; }
-int16_t Movement::getFutureX() { return future_coordinate_.x; }
-int16_t Movement::getFutureY() { return future_coordinate_.y; }
+const utils::Coordinate Movement::getCoordinate() { return coordinate_; }
+const uint8_t Movement::getDirection() { return direction_; }
+const COORDINATE_TYPE Movement::getX() { return coordinate_.x; }
+const COORDINATE_TYPE Movement::getY() { return coordinate_.y; }
+const utils::Coordinate Movement::getFutureCoordinate() { return future_coordinate_; }
+const uint8_t Movement::getFutureDirection() { return future_direction_; }
+const COORDINATE_TYPE Movement::getFutureX() { return future_coordinate_.x; }
+const COORDINATE_TYPE Movement::getFutureY() { return future_coordinate_.y; }
 
 void Movement::moveUp() {
     future_coordinate_.y++;

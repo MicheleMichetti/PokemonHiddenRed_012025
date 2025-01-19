@@ -3,10 +3,12 @@
 #include <bits/stdc++.h>
 #include <stdint.h>
 
+using COORDINATE_TYPE = uint16_t;
+
 namespace utils {
 struct Coordinate {
-    uint16_t x;
-    uint16_t y;
+    COORDINATE_TYPE x;
+    COORDINATE_TYPE y;
 };
 
 enum Direction : uint8_t {

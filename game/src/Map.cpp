@@ -11,7 +11,7 @@ Map::Map() {
     this->length_y_ = 0;
 }
 
-Map::Map(const uint16_t& id, const uint8_t& type, const std::string& map_name, const tileArray& tiles, const uint16_t& length_x, const uint16_t& length_y, const entityMap& entities) {
+Map::Map(const uint16_t& id, const uint8_t& type, const std::string& map_name, const tileArray& tiles, const COORDINATE_TYPE& length_x, const COORDINATE_TYPE& length_y, const entityMap& entities) {
     this->id_ = id;
     this->type_ = type;
     this->map_name_ = map_name;
@@ -26,16 +26,16 @@ Map::~Map() { entities_.clear(); }
 void Map::setId(const uint16_t& id) { this->id_ = id; }
 void Map::setType(const uint8_t& type) { this->type_ = type; }
 void Map::setMapName(const std::string& map_name) { this->map_name_ = map_name; }
-void Map::setLengthX(const uint16_t& length_x) { this->length_x_ = length_x; }
-void Map::setLengthY(const uint16_t& length_y) { this->length_y_ = length_y; }
+void Map::setLengthX(const COORDINATE_TYPE& length_x) { this->length_x_ = length_x; }
+void Map::setLengthY(const COORDINATE_TYPE& length_y) { this->length_y_ = length_y; }
 void Map::setTiles(const tileArray& tiles) { this->tiles_ = tiles; }
 void Map::setEntities(const entityMap& entities) { this->entities_ = entities; }
 
 const uint16_t Map::getId() { return id_; }
 const uint8_t Map::getType() { return type_; }
 const std::string Map::getMapName() { return map_name_; }
-const uint16_t Map::getLengthX() { return length_x_; }
-const uint16_t Map::getLengthY() { return length_y_; }
+const COORDINATE_TYPE Map::getLengthX() { return length_x_; }
+const COORDINATE_TYPE Map::getLengthY() { return length_y_; }
 const tileArray Map::getTiles() { return tiles_; }
 const entityMap Map::getEntities() { return entities_; }
 
@@ -43,7 +43,7 @@ entityCoordinates Map::setCoordinates(const utils::Coordinate& coord) const { re
 
 void Map::swapTiles(Tile& tile_1, Tile& tile_2) { std::swap(tile_1, tile_2); }
 void Map::setTile(const utils::Coordinate& coordinate, const Tile& tile) { tiles_[coordinate.x][coordinate.y] = tile; }
-void Map::resizeTiles(const uint16_t& length_x, const uint16_t& length_y) {
+void Map::resizeTiles(const COORDINATE_TYPE& length_x, const COORDINATE_TYPE& length_y) {
     if (length_x == 0 || length_y == 0) {
         SPDLOG_ERROR("The tile matrix that is being set has dimension 0. Exiting. ");
         throw std::invalid_argument("The tile matrix that is being set has dimension 0.");
@@ -53,7 +53,7 @@ void Map::resizeTiles(const uint16_t& length_x, const uint16_t& length_y) {
     this->length_x_ = length_x;
     this->length_y_ = length_y;
 }
-void Map::resizeAndSetTiles(const tileArray& tiles, const uint16_t& length_x, const uint16_t& length_y) {
+void Map::resizeAndSetTiles(const tileArray& tiles, const COORDINATE_TYPE& length_x, const COORDINATE_TYPE& length_y) {
     resizeTiles(length_x, length_y);
     this->tiles_ = tiles;
 }
