@@ -10,26 +10,26 @@ class Entity {
     uint8_t type_;
     std::string name_;
     _movement::Movement movement_;
-    InteractionEntity interaction_;
+    std::vector<InteractionEntity> interaction_;
 
    public:
     explicit Entity();
     Entity(const Entity&) = delete;
     Entity& operator=(const Entity&) = delete;
-    Entity(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, InteractionEntity interaction);
+    Entity(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, std::vector<InteractionEntity> interaction);
     virtual ~Entity() = default;
 
     void setID(uint32_t id);
     void setType(uint8_t type);
     void setName(std::string name);
     void setMovement(_movement::Movement movement);
-    void setInteraction(InteractionEntity interaction);
+    void setInteraction(std::vector<InteractionEntity> interaction);
 
     uint32_t getID();
     uint8_t getType();
     std::string getName();
     _movement::Movement getMovement();
-    InteractionEntity getInteraction();
+    std::vector<InteractionEntity> getInteraction();
 
     void virtual calculateMovement() = 0;
     void virtual executeMovement() = 0;
