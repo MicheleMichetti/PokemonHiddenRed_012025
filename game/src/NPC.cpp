@@ -84,30 +84,28 @@ void NPC::calculateMovement() {
 void NPC::executeMovement() { movement_.updateStatus(); }
 
 void NPC::playInteraction() {
-
     /*
     text_object
-    text_human  
+    text_human
     simple_choice (yes/no)
-    multiple_choice  
-    collect_object 
+    multiple_choice
+    collect_object
     status_change
     trigger
     trainer
     */
 
-    switch (interaction_.getType())
-    {
+    switch (interaction_.getType()) {
         case (utils::InteractionType::simple_choice):
-            
+
         case (utils::InteractionType::text_human):
         case (utils::InteractionType::text_object):
-            for(std::string text : interaction_.getDialogue()) {
-                //TODO: Implement the graphics and the fuction that will get as input "dialogue_" and print it.
-                std::cout<<text<<std::endl;
+            for (std::string text : interaction_.getDialogue()) {
+                // TODO: Implement the graphics and the fuction that will get as input "dialogue_" and print it.
+                std::cout << text << std::endl;
             }
             break;
-        
+
         default:
             break;
     }

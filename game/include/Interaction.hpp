@@ -42,7 +42,6 @@ class Interaction {
     void switchToPlayed();
     void switchToEnded();
     void increaseInteractionCounter();
-
 };
 
 }  // namespace _interaction
