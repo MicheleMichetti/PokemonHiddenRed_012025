@@ -25,7 +25,7 @@ enum InteractionType : uint8_t {
     simple_choice = 0b00000100,
     multiple_choice = 0b00001000,
     collect_object = 0b00010000,
-    movable_objects = 0b00100000,
+    status_change = 0b00100000,
     trigger = 0b01000000,
     trainer = 0b10000000
 };

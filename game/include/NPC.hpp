@@ -26,4 +26,7 @@ class NPC : public Entity {
 
     void calculateMovement() override;
     void executeMovement() override;
+
+    void playInteraction() override;
+    void endInteraction() override;
 };
