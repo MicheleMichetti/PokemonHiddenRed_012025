@@ -34,5 +34,8 @@ class Entity {
     void virtual calculateMovement() = 0;
     void virtual executeMovement() = 0;
 
+    void virtual playInteraction() = 0;
+    void virtual endInteraction() = 0;
+
     void EntityErrorMessage(const char* c);
 };
