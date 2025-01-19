@@ -10,8 +10,8 @@ class NPC : public Entity {
 
    public:
     NPC();
-    NPC(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, std::vector<InteractionEntity> interaction, std::vector<std::string> dialogue, std::vector<utils::Coordinate> boundaries,
-        uint8_t directions, uint32_t next_entity_ID[2]);
+    NPC(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, std::vector<InteractionEntity> interaction, std::vector<std::string> dialogue,
+        std::vector<utils::Coordinate> boundaries, uint8_t directions, uint32_t next_entity_ID[2]);
     ~NPC();
 
     std::vector<std::string> getDialogue();

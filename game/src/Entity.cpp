@@ -9,7 +9,7 @@ Entity::Entity() {
     this->movement_.setFutureDirection(0);
     this->movement_.setFutureX(0);
     this->movement_.setFutureY(0);
-    for(InteractionEntity interact : interaction_) {
+    for (InteractionEntity interact : interaction_) {
         interact.setType(0);
         interact.setStatus(0);  // as default constructor, the interaction exists but it is disabled by setting the first bit to 0.
     }

@@ -7,8 +7,8 @@ NPC::NPC() : Entity() {
     this->next_entity_ID[0, 0];
     this->movement_possibilities_ = 0;
 }
-NPC::NPC(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, std::vector<InteractionEntity> interaction, std::vector<std::string> dialogue, std::vector<utils::Coordinate> boundaries,
-         uint8_t directions, uint32_t next_entity_ID[2])
+NPC::NPC(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, std::vector<InteractionEntity> interaction, std::vector<std::string> dialogue,
+         std::vector<utils::Coordinate> boundaries, uint8_t directions, uint32_t next_entity_ID[2])
     : Entity(id, type, name, movement, interaction) {
     this->dialogue = dialogue;
     this->boundaries = boundaries;
