@@ -1,14 +1,14 @@
 find_package(PkgConfig REQUIRED)
 find_package(fmt REQUIRED)
 
-file(GLOB SRC_FILES
+file(GLOB ENGINE_FILES
     src/*.cpp
     include/*.hpp
 )
 
 add_library(
     engine-lib SHARED
-    ${SRC_FILES}
+    ${ENGINE_FILES}
 )
 
 set_target_properties(engine-lib PROPERTIES LINKER_LANGUAGE CXX)

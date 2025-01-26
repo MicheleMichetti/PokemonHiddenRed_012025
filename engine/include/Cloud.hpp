@@ -2,7 +2,7 @@
 
 #include <bits/stdc++.h>
 #include <stdint.h>
-#include<allegro.h>
+#include <allegro5/allegro.h>
 
 class Cloud {
     protected:
