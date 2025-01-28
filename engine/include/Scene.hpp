@@ -5,6 +5,9 @@
 #include<MapEngine.hpp>
 #include<MenuBox.hpp>
 
+//Forward declarations (avoid circular dependencies)
+class GameManager;
+
 class Scene {
     private:
         MapEngine map_engine_;
