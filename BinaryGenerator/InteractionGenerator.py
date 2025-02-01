@@ -23,7 +23,7 @@ FIELD_LENGTHS = {
 FILE_NAME = sys.argv[1]
 FILE_PATH = f"{FILE_NAME}.csv"  # Full path to the input CSV file
 OUTPUT_DIR = "output_files"  # Directory to save the output files
-OUTPUT_FILE_PATH = os.path.join(OUTPUT_DIR, f"{FILE_NAME}.txt")  # Full path to the output text file
+OUTPUT_FILE_PATH = os.path.join(OUTPUT_DIR, f"{FILE_NAME}.dat")  # Full path to the output text file
 
 
 def to_binary(value, bit_length):
@@ -107,8 +107,8 @@ try:
         reader = csv.reader(file, delimiter=";")  # Read the CSV file with ';' as the delimiter
 
         # Clear the content of the output file before writing
-        with open(OUTPUT_FILE_PATH, "w", encoding="utf-8") as output_file:
-            output_file.write("")
+        with open(OUTPUT_FILE_PATH, "wb") as output_file: #_ , encoding="utf-8" _ write option
+            pass
 
         # Iterate through each row in the CSV file
         for i, row in enumerate(reader, start=1):
