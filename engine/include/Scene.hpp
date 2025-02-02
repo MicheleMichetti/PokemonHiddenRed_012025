@@ -13,4 +13,11 @@ class Scene {
         MapEngine map_engine_;
         ChoiceBox choice_box_;
         DialogueBox dialogue_box_;
+        MenuBox menu_box_;
+
+        Scene();
+        static Scene instance;
+
+    public:
+        static void getInstance();
 };
