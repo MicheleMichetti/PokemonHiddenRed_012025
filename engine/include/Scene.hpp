@@ -1,5 +1,7 @@
 #pragma once
 
+#include<mutex>
+
 #include<DialogueBox.hpp>
 #include<ChoiceBox.hpp>
 #include<MapEngine.hpp>
@@ -15,9 +17,11 @@ class Scene {
         DialogueBox dialogue_box_;
         MenuBox menu_box_;
 
+        static std::mutex mtx;
+
         Scene();
-        static Scene instance;
+        static Scene *instancePtr;
 
     public:
-        static void getInstance();
+        static Scene* getInstance();
 };
