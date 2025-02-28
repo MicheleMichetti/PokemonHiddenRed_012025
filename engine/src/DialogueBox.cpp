@@ -7,6 +7,6 @@ DialogueBox::DialogueBox(uint16_t px_heigth, uint16_t px_width, std::vector<std:
     this->dialogue_ = dialogue;
 }
 
-void DialogueBox::retrieveFilling(std::vector<std::string> dialogue) {
+void DialogueBox::setDialogue(std::vector<std::string> dialogue) {
     this->dialogue_ = dialogue;
 }
