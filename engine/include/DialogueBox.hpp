@@ -2,8 +2,6 @@
 
 #include<Cloud.hpp>
 
-class Interaction;
-
 class DialogueBox : public virtual Cloud {
     private:
         std::vector<std::string> dialogue_;
