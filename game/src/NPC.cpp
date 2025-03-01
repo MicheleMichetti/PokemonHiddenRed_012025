@@ -97,7 +97,7 @@ void NPC::playInteraction() {
 
     switch (interaction_.getType()) {
         case (utils::InteractionType::simple_choice):
-
+Playtext:
         case (utils::InteractionType::text_human):
         case (utils::InteractionType::text_object):
             for (std::string text : interaction_.getDialogue()) {
@@ -105,10 +105,26 @@ void NPC::playInteraction() {
                 std::cout << text << std::endl;
             }
             break;
-
+        case (utils::InteractionType::multiple_choice):
+            //..
+            goto Playtext;
+        case (utils::InteractionType::status_change):
+            //..
+            goto Playtext;
+        case (utils::InteractionType::collect_object):
+            //..
+            goto Playtext;
+        case (utils::InteractionType::trigger):
+            //..
+            goto Playtext;
+        case (utils::InteractionType::trainer):
+            //..
+            goto Playtext;
         default:
             break;
     }
 }
 
-void NPC::endInteraction() {}
+void NPC::endInteraction() {
+    this->interaction_.endInteraction();
+}
