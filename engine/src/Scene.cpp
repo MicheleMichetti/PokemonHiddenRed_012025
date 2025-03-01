@@ -7,9 +7,9 @@ Scene::Scene() {
     this->map_engine_ = *(new MapEngine());
 }
 
-Scene::getInstance() {
+Scene* Scene::getInstance() {
     if(instancePtr != nullptr) {
-        return;
+        return instancePtr;
     }
     std::lock_guard<std::mutex> lock(mtx);
     instancePtr = new Scene();
