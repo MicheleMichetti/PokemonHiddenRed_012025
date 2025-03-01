@@ -97,7 +97,7 @@ void NPC::playInteraction() {
 
     switch (interaction_.getType()) {
         case (utils::InteractionType::simple_choice):
-Playtext:
+        Playtext:
         case (utils::InteractionType::text_human):
         case (utils::InteractionType::text_object):
             for (std::string text : interaction_.getDialogue()) {
@@ -125,6 +125,4 @@ Playtext:
     }
 }
 
-void NPC::endInteraction() {
-    this->interaction_.endInteraction();
-}
+void NPC::endInteraction() { this->interaction_.endInteraction(); }
