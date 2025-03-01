@@ -111,7 +111,9 @@ void Map::evaluateEntitiesMovement() {
         if (it->second->getType() > 2) {
             continue;
         }
-        it->second->calculateMovement();
+        if(((double)std::rand() / (double)RAND_MAX) <=0.3) {
+            it->second->calculateMovement();
+        }
     }
 }
 
