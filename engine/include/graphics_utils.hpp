@@ -16,5 +16,20 @@ struct PixelCoordinates {
     uint16_t y;
 };
 
+enum TileStatus : uint8_t {
+    DRAW_TILE   = 0b00000001,
+    DRAW_BKGD   = 0b00000010,
+    DRAW_OBJ    = 0b00000100
+    
+};
+
+enum MapStatus : uint8_t {
+    UPDATE_DRAW   = 0b00000001,
+    IS_BUFFER_MAP = 0b00000010
+};
+
+
+
+
 
 };
