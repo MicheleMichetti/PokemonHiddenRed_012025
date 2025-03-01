@@ -57,20 +57,36 @@ const COORDINATE_TYPE Movement::getFutureX() { return future_coordinate_.x; }
 const COORDINATE_TYPE Movement::getFutureY() { return future_coordinate_.y; }
 
 void Movement::moveUp() {
-    future_coordinate_.y++;
     setFutureDirection(utils::Direction::up);
+    if(this->direction_ != this->future_direction_) {
+        return;
+    }
+    future_coordinate_.y++;
+    
 }
 void Movement::moveDown() {
-    future_coordinate_.y--;
     setFutureDirection(utils::Direction::down);
+    if(this->direction_ != this->future_direction_) {
+        return;
+    }
+    future_coordinate_.y--;
+    
 }
 void Movement::moveRight() {
-    future_coordinate_.x++;
     setFutureDirection(utils::Direction::right);
+    if(this->direction_ != this->future_direction_) {
+        return;
+    }
+    future_coordinate_.x++;
+
 }
 void Movement::moveLeft() {
-    future_coordinate_.x--;
     setFutureDirection(utils::Direction::left);
+    if(this->direction_ != this->future_direction_) {
+        return;
+    }
+    future_coordinate_.x--;
+    
 }
 
 void Movement::updateStatus() {
