@@ -33,6 +33,7 @@ _movement::Movement Entity::getMovement() { return movement_; }
 InteractionEntity Entity::getInteraction() { return interaction_; }
 
 void Entity::EntityErrorMessage(const char* c) {
+    //*c = "Entity "+this->id_+" : "+(*c);
     SPDLOG_ERROR(c);
     throw std::runtime_error(c);
 }
