@@ -24,4 +24,19 @@ class Scene {
 
     public:
         static Scene* getInstance();
+
+        void setMapEngine(MapEngine map_engine);
+        void setChoiceBox(ChoiceBox choice_box);
+        void setDialogueBox(DialogueBox dialogue_box);
+        void setMenuBox(MenuBox menu_box);
+        void setMutex();//technically unnecessary since mutex is static
+
+        MapEngine getMapEngine();
+        ChoiceBox getChoiceBox();
+        DialogueBox getDialogueBox();
+        MenuBox getMenuBox();
+        std::mutex getMutex();//technically unnecessary since mutex is static
+
+        void updateScene();
+
 };
