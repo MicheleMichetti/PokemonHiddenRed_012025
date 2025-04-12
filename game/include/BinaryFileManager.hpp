@@ -27,6 +27,8 @@ class BinaryFileManager {
     BinaryFileManager(std::string filename, std::ios_base::openmode mode);
     std::ios_base::openmode getMode();
     std::string getFilename();
+    std::fstream getStream();
+
     void openFile(std::ios_base::openmode mode);
     /**
      * Check that the stream is not failed, then closes it.

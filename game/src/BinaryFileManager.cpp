@@ -14,6 +14,8 @@ std::string BinaryFileManager::getFilename() { return this->filename; }
 
 std::ios_base::openmode BinaryFileManager::getMode() { return this->mode; }
 
+std::fstream BinaryFileManager::getStream() {return this->stream;} 
+
 void BinaryFileManager::openFile(std::ios_base::openmode mode) {
     this->mode = mode;
     stream.open(this->filename, mode);
@@ -37,7 +39,7 @@ void BinaryFileManager::commit() {
 std::string BinaryFileManager::readBitsAtPosition(const uint32_t& position, const uint32_t& n_bit) {
     char* read_string;
     stream.seekg(position);
-    stream.get(read_string, n_bit);
+    stream.get(read_string, n_bit).;
     return read_string;
 }
 
