@@ -103,7 +103,7 @@ void Map::loadEntities(const std::vector<utils::Coordinate>& coord, Entity* enti
     }
 }
 
-void Map::updateEntityInteraction(const utils::Coordinate& coord, const InteractionEntity& inter) { entities_.at(setCoordinates(coord))->setInteraction(inter); }
+void Map::updateInteraction(const utils::Coordinate& coord, const Interaction& inter) { entities_.at(setCoordinates(coord))->setInteraction(inter); }
 
 void Map::evaluateEntitiesMovement() {
     entityMap::iterator it = entities_.begin();

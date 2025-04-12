@@ -68,3 +68,13 @@ void Interaction::increaseInteractionCounter() {
         utils::setBitTo<uint8_t>(status_bit_mask_, bit_pos, utils::readBit<uint8_t>(counter, bit_pos - 4));
     }
 }
+
+void Interaction::playInteraction() {
+    status_bit_mask_ |= utils::InteractionStatus::IS_PLAYING;
+
+    increaseInteractionCounter();
+}
+void Interaction::endInteraction() {
+    status_bit_mask_ |= utils::InteractionStatus::INTERACTION_ENDED;
+    status_bit_mask_ & ~utils::InteractionStatus::IS_PLAYING;
+}

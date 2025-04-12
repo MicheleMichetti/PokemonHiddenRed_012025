@@ -12,7 +12,7 @@ Entity::Entity() {
     this->interaction_.setType(0);
     this->interaction_.setStatus(0);  // as default constructor, the interaction exists but it is disabled by setting the first bit to 0.
 }
-Entity::Entity(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, InteractionEntity interaction) {
+Entity::Entity(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, Interaction interaction) {
     this->id_ = id;
     this->type_ = type;
     this->name_ = name;
@@ -24,13 +24,13 @@ void Entity::setID(uint32_t id) { this->id_ = id; }
 void Entity::setType(uint8_t type) { this->type_ = type; }
 void Entity::setName(std::string name) { this->name_ = name; }
 void Entity::setMovement(_movement::Movement movement) { this->movement_ = movement; }
-void Entity::setInteraction(InteractionEntity interaction) { this->interaction_ = interaction; }
+void Entity::setInteraction(Interaction interaction) { this->interaction_ = interaction; }
 
 uint32_t Entity::getID() { return id_; }
 uint8_t Entity::getType() { return type_; }
 std::string Entity::getName() { return name_; }
 _movement::Movement Entity::getMovement() { return movement_; }
-InteractionEntity Entity::getInteraction() { return interaction_; }
+Interaction Entity::getInteraction() { return interaction_; }
 
 void Entity::EntityErrorMessage(const char* c) {
     //*c = "Entity "+this->id_+" : "+(*c);

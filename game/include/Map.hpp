@@ -58,7 +58,7 @@ class Map {
     void replaceEntity(const utils::Coordinate& coordinate, Entity* entity);
     void loadNextEntity(const Entity* entity);
     void loadEntities(const std::vector<utils::Coordinate>& coord, Entity* entities);
-    void updateEntityInteraction(const utils::Coordinate& coord, const InteractionEntity& inter);
+    void updateInteraction(const utils::Coordinate& coord, const Interaction& inter);
     void evaluateEntitiesMovement();
 
     void startEntitiesMovementThread();
