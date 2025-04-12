@@ -24,16 +24,14 @@ class BinaryFileManager {
     void checkOpen();
 
    public:
-    BinaryFileManager();
     BinaryFileManager(std::string filename, std::ios_base::openmode mode);
     std::ios_base::openmode getMode();
     std::string getFilename();
     void openFile(std::ios_base::openmode mode);
-    void closeFile();
     /**
      * Check that the stream is not failed, then closes it.
      */
-    void checkFailAndClose();
+    void commit();
     ~BinaryFileManager();
     std::string readBitsAtPosition(const uint32_t& position, const uint32_t& n_bit);
     void writeBitsAtPosition(const char* target, uint32_t n_bit, uint32_t position = 0);
