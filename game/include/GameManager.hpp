@@ -9,7 +9,6 @@ class GameManager {
     Map* buffer_map_;
     Player player_;
     Scene scene_ = Scene::getInstance();
-    BinaryFileManager binary_file_manager_;
 
    public:
     GameManager();
@@ -28,10 +27,13 @@ class GameManager {
     Scene getScene();
     BinaryFileManager getBinaryFileManager();
 
+    //Methods to get info from binary files
     void retrieveMapFromFile();
     void retrieveEntitiesFromFile();
     void retrieveInteractionsFromFile();
     void retrieveTilesFromFile();
     void retrieveCurrentPlayerInstance();
+
+    //Methods to get commands from keyboard
     uint8_t retrieveCommandFromUser();
 };
