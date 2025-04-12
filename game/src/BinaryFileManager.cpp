@@ -14,7 +14,7 @@ std::string BinaryFileManager::getFilename() { return this->filename; }
 
 std::ios_base::openmode BinaryFileManager::getMode() { return this->mode; }
 
-std::fstream BinaryFileManager::getStream() {return this->stream;} 
+std::fstream BinaryFileManager::getStream() { return this->stream; }
 
 void BinaryFileManager::openFile(std::ios_base::openmode mode) {
     this->mode = mode;
