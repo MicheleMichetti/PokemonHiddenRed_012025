@@ -64,14 +64,14 @@ bool Map::doesItCollide(const utils::Coordinate& coordinate, const uint8_t& dire
 }
 
 bool Map::doesItInteract(const utils::Coordinate& coordinate, const uint8_t& direction) {
-    if(entityMap.at(coordinate) == std::out_of_range) {
+    if (entityMap.at(coordinate) == std::out_of_range) {
         return false;
     }
     return true;
 }
 
 _interaction::Interaction Map::interact(const utils::Coordinate& coordinate, const uint8_t& direction) {
-    if(doesItInteract(coordinate, direction) == false) {
+    if (doesItInteract(coordinate, direction) == false) {
         return _interaction::Interaction::Interaction();
     }
     return entityMap.at(coordinate)->getInteraction();
