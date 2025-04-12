@@ -53,12 +53,13 @@ class Map {
 
     bool doesItCollide(const utils::Coordinate& coordinate, const uint8_t& direction);
     bool doesItInteract(const utils::Coordinate& coordinate, const uint8_t& direction);
+    _interaction::Interaction interact(const utils::Coordinate& coordinate, const uint8_t& direction);
 
     void loadEntity(const utils::Coordinate& coord, Entity* entity);
     void replaceEntity(const utils::Coordinate& coordinate, Entity* entity);
     void loadNextEntity(const Entity* entity);
     void loadEntities(const std::vector<utils::Coordinate>& coord, Entity* entities);
-    void updateInteraction(const utils::Coordinate& coord, const Interaction& inter);
+    void updateInteraction(const utils::Coordinate& coord, const _interaction::Interaction& inter);
     void evaluateEntitiesMovement();
 
     void startEntitiesMovementThread();

@@ -64,8 +64,17 @@ bool Map::doesItCollide(const utils::Coordinate& coordinate, const uint8_t& dire
 }
 
 bool Map::doesItInteract(const utils::Coordinate& coordinate, const uint8_t& direction) {
-    Tile tile = tiles_[coordinate.x][coordinate.y];
-    return tile.isInteraction(direction);
+    if(entityMap.at(coordinate) == std::out_of_range) {
+        return false;
+    }
+    return true;
+}
+
+_interaction::Interaction Map::interact(const utils::Coordinate& coordinate, const uint8_t& direction) {
+    if(doesItInteract(coordinate, direction) == false) {
+        return _interaction::Interaction::Interaction();
+    }
+    return entityMap.at(coordinate)->getInteraction();
 }
 
 void Map::loadEntity(const utils::Coordinate& coord, Entity* entity) {
@@ -103,7 +112,7 @@ void Map::loadEntities(const std::vector<utils::Coordinate>& coord, Entity* enti
     }
 }
 
-void Map::updateInteraction(const utils::Coordinate& coord, const Interaction& inter) { entities_.at(setCoordinates(coord))->setInteraction(inter); }
+void Map::updateInteraction(const utils::Coordinate& coord, const _interaction::Interaction& inter) { entities_.at(setCoordinates(coord))->setInteraction(inter); }
 
 void Map::evaluateEntitiesMovement() {
     entityMap::iterator it = entities_.begin();

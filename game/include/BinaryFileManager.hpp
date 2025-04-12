@@ -24,12 +24,12 @@ class BinaryFileManager {
     void checkOpen();
 
    public:
-    BinaryFileManager(std::string filename, std::ios_base::openmode mode);
-    std::ios_base::openmode getMode();
-    std::string getFilename();
-    std::fstream getStream();
+    BinaryFileManager(const std::string &filename, const std::ios_base::openmode &mode);
+    std::ios_base::openmode getMode() const;
+    std::string getFilename()  const;
+    std::fstream* getStream();
 
-    void openFile(std::ios_base::openmode mode);
+    void openFile(const std::ios_base::openmode &mode);
     /**
      * Check that the stream is not failed, then closes it.
      */

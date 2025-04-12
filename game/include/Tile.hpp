@@ -1,6 +1,5 @@
 #pragma once
 
-#include <InteractionTile.hpp>
 #include <utils.hpp>
 
 class Tile {

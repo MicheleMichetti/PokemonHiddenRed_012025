@@ -3,20 +3,20 @@
 #include <BinaryFileManager.hpp>
 #include <utils.hpp>
 
-BinaryFileManager::BinaryFileManager(std::string filename, std::ios_base::openmode mode) {
+BinaryFileManager::BinaryFileManager(const std::string &filename, const std::ios_base::openmode &mode) {
     this->filename = filename;
     this->mode = mode;
     stream.open(filename, mode);
     checkOpen();
 }
 
-std::string BinaryFileManager::getFilename() { return this->filename; }
+std::string BinaryFileManager::getFilename() const { return this->filename; }
 
-std::ios_base::openmode BinaryFileManager::getMode() { return this->mode; }
+std::ios_base::openmode BinaryFileManager::getMode() const { return this->mode; }
 
-std::fstream BinaryFileManager::getStream() { return this->stream; }
+std::fstream* BinaryFileManager::getStream() { return &this->stream; }
 
-void BinaryFileManager::openFile(std::ios_base::openmode mode) {
+void BinaryFileManager::openFile(const std::ios_base::openmode &mode) {
     this->mode = mode;
     stream.open(this->filename, mode);
     checkOpen();
@@ -39,7 +39,7 @@ void BinaryFileManager::commit() {
 std::string BinaryFileManager::readBitsAtPosition(const uint32_t& position, const uint32_t& n_bit) {
     char* read_string;
     stream.seekg(position);
-    stream.get(read_string, n_bit).;
+    stream.get(read_string, n_bit);
     return read_string;
 }
 
