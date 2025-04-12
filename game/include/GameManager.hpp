@@ -27,13 +27,13 @@ class GameManager {
     Scene getScene();
     BinaryFileManager getBinaryFileManager();
 
-    //Methods to get info from binary files
+    // Methods to get info from binary files
     void retrieveMapFromFile();
     void retrieveEntitiesFromFile();
     void retrieveInteractionsFromFile();
     void retrieveTilesFromFile();
     void retrieveCurrentPlayerInstance();
 
-    //Methods to get commands from keyboard
+    // Methods to get commands from keyboard
     uint8_t retrieveCommandFromUser();
 };
