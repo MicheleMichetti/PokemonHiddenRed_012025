@@ -11,20 +11,19 @@
 
 namespace _tileFileMng {
 
-class TileFileManager {
-   private:
-    std::string file_name;
-    BinaryFileManager binary_mng;
+class TileFileManager : public BinaryFileManager {
+   //private:
+    //std::string file_name;
 
    public:
     TileFileManager();
-    TileFileManager(std::string file_name);
+    TileFileManager(std::string file_name, const std::ios_base::openmode& mode);
     ~TileFileManager();
 
-    std::string getFileName();
-    BinaryFileManager getBinaryFileManager();
-    void setFileName(std::string file_name);
-    void setBinaryFileManager(BinaryFileManager file_mng);
+    //std::string getFileName();
+    //BinaryFileManager getBinaryFileManager();
+    //void setFileName(std::string file_name);
+    //void setBinaryFileManager(BinaryFileManager file_mng);
 
     void retrieveTiles();
 };

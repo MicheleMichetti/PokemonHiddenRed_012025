@@ -8,7 +8,7 @@ class Player : public Entity {
 
    public:
     Player();
-    Player(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, Interaction interaction, uint8_t status);
+    Player(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, _interaction::Interaction interaction, uint8_t status);
 
     void setStatus(uint8_t status);
 

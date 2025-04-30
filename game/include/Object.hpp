@@ -8,6 +8,6 @@ class Object : public Entity {
 
    public:
     Object();
-    Object(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, Interaction interaction, std::vector<std::string> dialogue);
+    Object(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, _interaction::Interaction interaction, std::vector<std::string> dialogue);
     ~Object();
 };

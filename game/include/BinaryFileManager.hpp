@@ -17,16 +17,17 @@ trunc:      truncate	Any contents that existed in the file before it is open are
 
 class BinaryFileManager {
    private:
-    std::string filename;
+    std::string file_name;
     std::fstream stream;
     std::ios_base::openmode mode;
 
     void checkOpen();
 
    public:
-    BinaryFileManager(const std::string& filename, const std::ios_base::openmode& mode);
+    BinaryFileManager();
+    BinaryFileManager(const std::string& file_name, const std::ios_base::openmode& mode);
     std::ios_base::openmode getMode() const;
-    std::string getFilename() const;
+    std::string getFileName() const;
     std::fstream* getStream();
 
     void openFile(const std::ios_base::openmode& mode);

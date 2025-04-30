@@ -16,7 +16,7 @@ class Interaction {
     std::vector<uint32_t> options_;
 
    public:
-    static Interaction();
+    Interaction();
     Interaction(uint32_t ID, uint8_t type, uint8_t status_bit_mask = 0, std::vector<std::string> dialogue = {""}, std::vector<uint32_t> options = {0});
     ~Interaction();
 

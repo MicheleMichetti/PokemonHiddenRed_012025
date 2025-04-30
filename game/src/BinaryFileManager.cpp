@@ -3,14 +3,14 @@
 #include <BinaryFileManager.hpp>
 #include <utils.hpp>
 
-BinaryFileManager::BinaryFileManager(const std::string& filename, const std::ios_base::openmode& mode) {
-    this->filename = filename;
+BinaryFileManager::BinaryFileManager(const std::string& file_name, const std::ios_base::openmode& mode) {
+    this->file_name = file_name;
     this->mode = mode;
-    stream.open(filename, mode);
+    stream.open(file_name, mode);
     checkOpen();
 }
 
-std::string BinaryFileManager::getFilename() const { return this->filename; }
+std::string BinaryFileManager::getFileName() const { return this->file_name; }
 
 std::ios_base::openmode BinaryFileManager::getMode() const { return this->mode; }
 
@@ -18,7 +18,7 @@ std::fstream* BinaryFileManager::getStream() { return &this->stream; }
 
 void BinaryFileManager::openFile(const std::ios_base::openmode& mode) {
     this->mode = mode;
-    stream.open(this->filename, mode);
+    stream.open(this->file_name, mode);
     checkOpen();
 }
 
@@ -30,7 +30,7 @@ BinaryFileManager::~BinaryFileManager() {
 
 void BinaryFileManager::commit() {
     if (stream.fail()) {
-        IOErrorMessage(("Error committing changes to file " + this->filename).c_str());
+        IOErrorMessage(("Error committing changes to file " + this->file_name).c_str());
         return;
     }
     stream.close();
@@ -45,7 +45,7 @@ std::string BinaryFileManager::readBitsAtPosition(const uint32_t& position, cons
 
 void BinaryFileManager::writeBitsAtPosition(const char* target, uint32_t n_bit, uint32_t position) {
     if (!stream.is_open() && position < 0) {
-        IOErrorMessage(("Can not write to file " + this->filename + " at position " + std::to_string(position)).c_str());
+        IOErrorMessage(("Can not write to file " + this->file_name + " at position " + std::to_string(position)).c_str());
         return;
     }
     if (position != 0) {
@@ -67,7 +67,7 @@ void BinaryFileManager::writeBitsInAppend(const char* target) { writeBitsInAppen
 void BinaryFileManager::setPermission(std::ios_base::openmode mode) {
     std::streampos position = stream.tellg();
     stream.close();
-    stream.open(this->filename, mode);
+    stream.open(this->file_name, mode);
     this->mode = mode;
     checkOpen();
     stream.seekg(position);
@@ -75,7 +75,7 @@ void BinaryFileManager::setPermission(std::ios_base::openmode mode) {
 
 void BinaryFileManager::checkOpen() {
     if (!stream.is_open()) {
-        IOErrorMessage(("File " + this->filename + " is not open").c_str());
+        IOErrorMessage(("File " + this->file_name + " is not open").c_str());
     }
 }
 

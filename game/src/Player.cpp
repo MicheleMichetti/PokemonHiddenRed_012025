@@ -1,7 +1,7 @@
 #include <Player.hpp>
 
 Player::Player() : Entity() { this->status_ = 0; }
-Player::Player(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, Interaction interaction, uint8_t status) : Entity(id, type, name, movement, interaction) {
+Player::Player(uint32_t id, uint8_t type, std::string name, _movement::Movement movement, _interaction::Interaction interaction, uint8_t status) : Entity(id, type, name, movement, interaction) {
     this->status_ = status;
 }
 
