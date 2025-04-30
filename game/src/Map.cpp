@@ -69,7 +69,6 @@ bool Map::doesItInteract(const utils::Coordinate& coordinate, const uint8_t& dir
         return false;
     }
     return this->entities_map.at(coord)->getInteraction().isInteraction();
-
 }
 
 void Map::interact(const utils::Coordinate& coordinate, const uint8_t& direction) {

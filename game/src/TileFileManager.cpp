@@ -2,13 +2,14 @@
 
 using namespace _tileFileMng;
 
-TileFileManager::TileFileManager() : BinaryFileManager() {};
+TileFileManager::TileFileManager() : BinaryFileManager(){};
 
-TileFileManager::TileFileManager(std::string file_name, const std::ios_base::openmode& mode) : BinaryFileManager(file_name, mode) {
-    //file_name = file_name;
-};
+TileFileManager::TileFileManager(std::string file_name, const std::ios_base::openmode& mode)
+    : BinaryFileManager(file_name, mode){
+          // file_name = file_name;
+      };
 
-//TileFileManager::~TileFileManager() { }
+// TileFileManager::~TileFileManager() { }
 
 // std::string TileFileManager::getFileName() { return this->getFileName(); }
 
