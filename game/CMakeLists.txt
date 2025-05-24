@@ -5,6 +5,10 @@ file(GLOB SRC_FILES
     src/*.cpp
     include/*.hpp
 )
+#[[
+link_libraries(
+    engine-lib
+)]]
 
 add_library(
     pokemon-lib SHARED
@@ -25,4 +29,5 @@ target_include_directories(pokemon-lib PUBLIC ${BOOST_INCLUDE_DIRS})
 target_link_libraries(pokemon-lib PRIVATE ${JSONCPP_LIBRARIES})
 target_link_libraries(pokemon-lib PRIVATE ${ALLEGRO_LIBRARIES})
 target_link_libraries(pokemon-lib PRIVATE ${BOOST_LIBRARIES})
+target_link_libraries(pokemon-lib PRIVATE engine-lib)
 target_link_libraries(pokemon-lib PRIVATE fmt::fmt)

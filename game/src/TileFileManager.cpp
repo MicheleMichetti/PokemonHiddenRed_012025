@@ -1,13 +1,16 @@
 #include <TileFileManager.hpp>
+#include <Tile.hpp>
+#include <TileEngine.hpp>
 
 using namespace _tileFileMng;
 
-TileFileManager::TileFileManager() : BinaryFileManager(){};
+TileFileManager::TileFileManager() : BinaryFileManager() {}
 
 TileFileManager::TileFileManager(std::string file_name, const std::ios_base::openmode& mode)
-    : BinaryFileManager(file_name, mode){
+    : BinaryFileManager(file_name, mode) {
           // file_name = file_name;
-      };
+          std::cout<<"TileFileManager constructor called with file name: " << file_name << std::endl;
+      }
 
 // TileFileManager::~TileFileManager() { }
 
@@ -22,17 +25,21 @@ TileFileManager::TileFileManager(std::string file_name, const std::ios_base::ope
 void TileFileManager::retrieveTiles() {
     uint32_t position = 0;
     while (this->getStream()->eof() == false) {
-        uint8_t bkgd = uint8_t(this->readBitsAtPosition(position, BITFIELD_BKG));
+        uint8_t bkgd = 0;
+        readBitsSequence(bkgd, position, BITFIELD_BKG);
         position += BITFIELD_BKG;
-        uint8_t type = uint8_t(this->readBitsAtPosition(position, BITFIELD_TYPE));
+        uint8_t type = 0;
+        readBitsSequence(type, position, BITFIELD_TYPE);
         position += BITFIELD_TYPE;
-        std::string image_file_name = this->readBitsAtPosition(position, BITFIELD_IGM_FILENAME);
+        std::string image_file_name = "";
+        readBitsSequence(image_file_name, position, BITFIELD_IGM_FILENAME);
         position += BITFIELD_IGM_FILENAME;
 
         std::pair key = std::make_pair(bkgd, type);
+        std::pair value = std::make_pair(Tile(type,bkgd,0b00000000),TileEngine(image_file_name, image_file_name));
 
-        tile_dictionary.insert(std::make_pair(key, image_file_name));
+        tile_dictionary.insert(std::make_pair(key, value));
     }
 
-    return
+    return;
 }

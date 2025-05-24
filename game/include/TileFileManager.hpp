@@ -1,13 +1,16 @@
 #pragma once
 
 #include <BinaryFileManager.hpp>
-#include <Tile.hpp>
+#include <map>
 
 #define BITFIELD_BKG 8
 #define BITFIELD_TYPE 8
 #define BITFIELD_IGM_FILENAME 56
 //#define BITFIELD_INTERACT_DIR 4
 //#define BITFIELD_INTERACT_ID 32
+
+class Tile;
+class TileEngine;
 
 namespace _tileFileMng {
 
@@ -28,6 +31,6 @@ class TileFileManager : public BinaryFileManager {
     void retrieveTiles();
 };
 
-std::map<std::pair<uint8_t, uint8_t>, Tile> tile_dictionary;
+static std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile,TileEngine>> tile_dictionary;
 
 }  // namespace _tileFileMng
