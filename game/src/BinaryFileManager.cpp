@@ -57,70 +57,70 @@ char* BinaryFileManager::readBitsSequence(const uint32_t& position, const uint32
     return read_string;
 }
 
-uint8_t BinaryFileManager::readBitsSequence(uint8_t &output, const uint32_t& position, const uint32_t& n_bit) {
+uint8_t BinaryFileManager::readBitsSequence(uint8_t& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
     output = uint8_t(atoll(read_string));
     delete[] read_string;
     return output;
 }
 
-uint16_t BinaryFileManager::readBitsSequence(uint16_t &output, const uint32_t& position, const uint32_t& n_bit) {
+uint16_t BinaryFileManager::readBitsSequence(uint16_t& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
     output = uint16_t(atoll(read_string));
     delete[] read_string;
     return output;
 }
 
-uint32_t BinaryFileManager::readBitsSequence(uint32_t &output, const uint32_t& position, const uint32_t& n_bit) {
+uint32_t BinaryFileManager::readBitsSequence(uint32_t& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
     output = uint32_t(atoll(read_string));
     delete[] read_string;
     return output;
 }
 
-uint64_t BinaryFileManager::readBitsSequence(uint64_t &output, const uint32_t& position, const uint32_t& n_bit) {
+uint64_t BinaryFileManager::readBitsSequence(uint64_t& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
     output = uint64_t(atoll(read_string));
     delete[] read_string;
     return output;
 }
 
-std::string BinaryFileManager::readBitsSequence(std::string &output, const uint32_t& position, const uint32_t& n_bit) {
+std::string BinaryFileManager::readBitsSequence(std::string& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
     output = std::string(read_string);
     delete[] read_string;
     return output;
 }
 
-char BinaryFileManager::readBitsSequence(char &output, const uint32_t& position, const uint32_t& n_bit) {
+char BinaryFileManager::readBitsSequence(char& output, const uint32_t& position, const uint32_t& n_bit) {
     output = *(readBitsSequence(position, n_bit));
     return output;
 }
 
-float BinaryFileManager::readBitsSequence(float &output, const uint32_t& position, const uint32_t& n_bit) {
+float BinaryFileManager::readBitsSequence(float& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
     output = atof(read_string);
     delete[] read_string;
     return output;
 }
 
-double BinaryFileManager::readBitsSequence(double &output, const uint32_t& position, const uint32_t& n_bit) {
+double BinaryFileManager::readBitsSequence(double& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
-    uint32_t shift = sizeof(double)*8/sizeof(char);
-    char** stop_string = new char*(read_string+shift);
+    uint32_t shift = sizeof(double) * 8 / sizeof(char);
+    char** stop_string = new char*(read_string + shift);
     output = strtod(read_string, stop_string);
     delete[] read_string;
     return output;
 }
 
-bool BinaryFileManager::readBitsSequence(bool &output, const uint32_t& position, const uint32_t& n_bit) {
+bool BinaryFileManager::readBitsSequence(bool& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
     output = utils::readBit<bool>(read_string, 0);
     delete[] read_string;
     return output;
 }
 
-int BinaryFileManager::readBitsSequence(int &output, const uint32_t& position, const uint32_t& n_bit) {
+int BinaryFileManager::readBitsSequence(int& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
     output = atoi(read_string);
     delete[] read_string;

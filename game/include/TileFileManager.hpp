@@ -31,6 +31,6 @@ class TileFileManager : public BinaryFileManager {
     void retrieveTiles();
 };
 
-static std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile,TileEngine>> tile_dictionary;
+static std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile, TileEngine>> tile_dictionary;
 
 }  // namespace _tileFileMng

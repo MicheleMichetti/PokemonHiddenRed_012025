@@ -1,16 +1,15 @@
-#include <TileFileManager.hpp>
 #include <Tile.hpp>
 #include <TileEngine.hpp>
+#include <TileFileManager.hpp>
 
 using namespace _tileFileMng;
 
 TileFileManager::TileFileManager() : BinaryFileManager() {}
 
-TileFileManager::TileFileManager(std::string file_name, const std::ios_base::openmode& mode)
-    : BinaryFileManager(file_name, mode) {
-          // file_name = file_name;
-          std::cout<<"TileFileManager constructor called with file name: " << file_name << std::endl;
-      }
+TileFileManager::TileFileManager(std::string file_name, const std::ios_base::openmode& mode) : BinaryFileManager(file_name, mode) {
+    // file_name = file_name;
+    std::cout << "TileFileManager constructor called with file name: " << file_name << std::endl;
+}
 
 // TileFileManager::~TileFileManager() { }
 
@@ -36,7 +35,7 @@ void TileFileManager::retrieveTiles() {
         position += BITFIELD_IGM_FILENAME;
 
         std::pair key = std::make_pair(bkgd, type);
-        std::pair value = std::make_pair(Tile(type,bkgd,0b00000000),TileEngine(image_file_name, image_file_name));
+        std::pair value = std::make_pair(Tile(type, bkgd, 0b00000000), TileEngine(image_file_name, image_file_name));
 
         tile_dictionary.insert(std::make_pair(key, value));
     }

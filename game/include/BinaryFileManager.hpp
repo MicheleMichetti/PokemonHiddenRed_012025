@@ -45,17 +45,16 @@ class BinaryFileManager {
      * @return A string containing the sequence of bits.
      */
     char* readBitsSequence(const uint32_t& position, const uint32_t& n_bit);
-    uint8_t readBitsSequence(uint8_t &output, const uint32_t& position, const uint32_t& n_bit);
-    uint16_t readBitsSequence(uint16_t &output, const uint32_t& position, const uint32_t& n_bit);
-    uint32_t readBitsSequence(uint32_t &output, const uint32_t& position, const uint32_t& n_bit);
-    uint64_t readBitsSequence(uint64_t &output, const uint32_t& position, const uint32_t& n_bit);
-    std::string readBitsSequence(std::string &output, const uint32_t& position, const uint32_t& n_bit);
-    char readBitsSequence(char &output, const uint32_t& position, const uint32_t& n_bit);
-    float readBitsSequence(float &output, const uint32_t& position, const uint32_t& n_bit);
-    double readBitsSequence(double &output, const uint32_t& position, const uint32_t& n_bit);
-    bool readBitsSequence(bool &output, const uint32_t& position, const uint32_t& n_bit);
-    int readBitsSequence(int &output, const uint32_t& position, const uint32_t& n_bit);
-
+    uint8_t readBitsSequence(uint8_t& output, const uint32_t& position, const uint32_t& n_bit);
+    uint16_t readBitsSequence(uint16_t& output, const uint32_t& position, const uint32_t& n_bit);
+    uint32_t readBitsSequence(uint32_t& output, const uint32_t& position, const uint32_t& n_bit);
+    uint64_t readBitsSequence(uint64_t& output, const uint32_t& position, const uint32_t& n_bit);
+    std::string readBitsSequence(std::string& output, const uint32_t& position, const uint32_t& n_bit);
+    char readBitsSequence(char& output, const uint32_t& position, const uint32_t& n_bit);
+    float readBitsSequence(float& output, const uint32_t& position, const uint32_t& n_bit);
+    double readBitsSequence(double& output, const uint32_t& position, const uint32_t& n_bit);
+    bool readBitsSequence(bool& output, const uint32_t& position, const uint32_t& n_bit);
+    int readBitsSequence(int& output, const uint32_t& position, const uint32_t& n_bit);
 
     void writeBitsAtPosition(const char* target, uint32_t n_bit, uint32_t position = 0);
     void writeBitsInAppend(const char* target, const uint32_t& n_bit);
