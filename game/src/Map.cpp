@@ -4,40 +4,40 @@
 #include <thread>
 
 Map::Map() {
-    this->id_ = 0;
-    this->type_ = 0;
+    this->id = 0;
+    this->type = 0;
     this->map_name_ = "";
     this->length_x_ = 0;
     this->length_y_ = 0;
 }
 
 Map::Map(const uint16_t& id, const uint8_t& type, const std::string& map_name, const tileArray& tiles, const COORDINATE_TYPE& length_x, const COORDINATE_TYPE& length_y, const entityMap& entities) {
-    this->id_ = id;
-    this->type_ = type;
+    this->id = id;
+    this->type = type;
     this->map_name_ = map_name;
     this->length_x_ = length_x;
     this->length_y_ = length_y;
     this->tiles_ = tiles;
-    this->entities_ = entities;
+    this->entities_map = entities;
 }
 
-Map::~Map() { entities_.clear(); }
+Map::~Map() { entities_map.clear(); }
 
-void Map::setId(const uint16_t& id) { this->id_ = id; }
-void Map::setType(const uint8_t& type) { this->type_ = type; }
+void Map::setId(const uint16_t& id) { this->id = id; }
+void Map::setType(const uint8_t& type) { this->type = type; }
 void Map::setMapName(const std::string& map_name) { this->map_name_ = map_name; }
 void Map::setLengthX(const COORDINATE_TYPE& length_x) { this->length_x_ = length_x; }
 void Map::setLengthY(const COORDINATE_TYPE& length_y) { this->length_y_ = length_y; }
 void Map::setTiles(const tileArray& tiles) { this->tiles_ = tiles; }
-void Map::setEntities(const entityMap& entities) { this->entities_ = entities; }
+void Map::setEntities(const entityMap& entities) { this->entities_map = entities; }
 
-const uint16_t Map::getId() { return id_; }
-const uint8_t Map::getType() { return type_; }
+const uint16_t Map::getId() { return id; }
+const uint8_t Map::getType() { return type; }
 const std::string Map::getMapName() { return map_name_; }
 const COORDINATE_TYPE Map::getLengthX() { return length_x_; }
 const COORDINATE_TYPE Map::getLengthY() { return length_y_; }
 const tileArray Map::getTiles() { return tiles_; }
-const entityMap Map::getEntities() { return entities_; }
+const entityMap Map::getEntities() { return entities_map; }
 
 entityCoordinates Map::setCoordinates(const utils::Coordinate& coord) const { return std::make_pair(coord.x, coord.y); }
 
@@ -64,22 +64,32 @@ bool Map::doesItCollide(const utils::Coordinate& coordinate, const uint8_t& dire
 }
 
 bool Map::doesItInteract(const utils::Coordinate& coordinate, const uint8_t& direction) {
-    Tile tile = tiles_[coordinate.x][coordinate.y];
-    return tile.isInteraction(direction);
+    entityCoordinates coord = setCoordinates(coordinate);
+    if (this->entities_map.find(coord) == entities_map.end()) {
+        return false;
+    }
+    return this->entities_map.at(coord)->getInteraction().isInteraction();
+}
+
+void Map::interact(const utils::Coordinate& coordinate, const uint8_t& direction) {
+    if (doesItInteract(coordinate, direction) == false) {
+        return;
+    }
+    this->entities_map.at(setCoordinates(coordinate))->getInteraction().playInteraction();
 }
 
 void Map::loadEntity(const utils::Coordinate& coord, Entity* entity) {
-    if (entities_.count(setCoordinates(coord))) {
-        // SPDLOG_ERROR(("At x="+std::string(coord.x)+" and y="+std::string(coord.y)+" there is already an entity on map "+std::string(id_)+".").c_str());
-        // throw std::invalid_argument(("At x="+coordinate.x+" and y="+coordinate.y+" there is already an entity on map "+id_+".").c_str());
+    if (entities_map.count(setCoordinates(coord))) {
+        // SPDLOG_ERROR(("At x="+std::string(coord.x)+" and y="+std::string(coord.y)+" there is already an entity on map "+std::string(id)+".").c_str());
+        // throw std::invalid_argument(("At x="+coordinate.x+" and y="+coordinate.y+" there is already an entity on map "+id+".").c_str());
         return;
     }
     // entityCoordinates ent_coord = setCoordinates(coord);//std::make_pair(coord.x, coord.y);
     std::pair _argument1 = std::make_pair(setCoordinates(coord), entity);
-    entities_.insert(_argument1);
+    entities_map.insert(_argument1);
 }
 
-void Map::replaceEntity(const utils::Coordinate& coordinate, Entity* entity) { entities_.at(setCoordinates(coordinate)) = entity; }
+void Map::replaceEntity(const utils::Coordinate& coordinate, Entity* entity) { entities_map.at(setCoordinates(coordinate)) = entity; }
 
 void Map::loadNextEntity(const Entity* entity) {
     /*if (entity->getNextEntityID(0) == 0) {
@@ -103,11 +113,11 @@ void Map::loadEntities(const std::vector<utils::Coordinate>& coord, Entity* enti
     }
 }
 
-void Map::updateEntityInteraction(const utils::Coordinate& coord, const InteractionEntity& inter) { entities_.at(setCoordinates(coord))->setInteraction(inter); }
+void Map::updateInteraction(const utils::Coordinate& coord, const _interaction::Interaction& inter) { entities_map.at(setCoordinates(coord))->setInteraction(inter); }
 
 void Map::evaluateEntitiesMovement() {
-    entityMap::iterator it = entities_.begin();
-    for (; it != entities_.end(); ++it) {
+    entityMap::iterator it = entities_map.begin();
+    for (; it != entities_map.end(); ++it) {
         if (it->second->getType() > 2) {
             continue;
         }

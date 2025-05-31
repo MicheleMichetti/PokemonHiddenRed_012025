@@ -1,18 +1,25 @@
 #pragma once
 
+#include <cstdint>
+#include <string>
 #include<graphics_utils.hpp>
+
+using namespace graphics_utils;
 
 class TileEngine {
 
     private:
         uint16_t ID_;
-        graphics_utils::PixelCoordinates coordinates_;
+        std::string type_img_name;
+        std::string bkgd_img_name;
+        PixelCoordinates coordinates_;
         uint8_t status_bitmask_;
         ALLEGRO_BITMAP* background_;
         ALLEGRO_BITMAP* object_;
 
     public:
         TileEngine();
+        TileEngine(std::string type_img_name, std::string bkgd_img_name);
         TileEngine(uint16_t ID, graphics_utils::PixelCoordinates coordinates, ALLEGRO_BITMAP *background, ALLEGRO_BITMAP *object);
         ~TileEngine();
 
@@ -31,5 +38,8 @@ class TileEngine {
         void drawBackground();
         void drawObject();
         void drawTile();
+        void drawBackground(PixelCoordinates coordinate);
+        void drawObject(PixelCoordinates coordinate);
+        void drawTile(PixelCoordinates coordinate);
 
 };

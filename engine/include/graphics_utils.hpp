@@ -17,9 +17,13 @@ struct PixelCoordinates {
 };
 
 enum TileStatus : uint8_t {
-    DRAW_TILE   = 0b00000001,
-    DRAW_BKGD   = 0b00000010,
-    DRAW_OBJ    = 0b00000100
+    Draw_Tile   = 0b00000001,
+    Draw_Bkgd   = 0b00000010,
+    Draw_Obj    = 0b00000100,
+    Coll_up    = 0b00001000,
+    Coll_down  = 0b00010000,
+    Coll_left  = 0b00100000,
+    Coll_right = 0b01000000,
     
 };
 

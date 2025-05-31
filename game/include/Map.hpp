@@ -13,13 +13,14 @@ using entityMap = std::map<entityCoordinates, Entity*>;
 
 class Map {
    private:
-    uint16_t id_;
-    uint8_t type_;
+    uint16_t id;
+    uint8_t type;
     std::string map_name_;
     COORDINATE_TYPE length_x_;
     COORDINATE_TYPE length_y_;
     tileArray tiles_;
-    entityMap entities_;
+    entityMap entities_map;
+    _interaction::Interaction retrieved_interaction;
 
    public:
     explicit Map();
@@ -53,12 +54,13 @@ class Map {
 
     bool doesItCollide(const utils::Coordinate& coordinate, const uint8_t& direction);
     bool doesItInteract(const utils::Coordinate& coordinate, const uint8_t& direction);
+    void interact(const utils::Coordinate& coordinate, const uint8_t& direction);
 
     void loadEntity(const utils::Coordinate& coord, Entity* entity);
     void replaceEntity(const utils::Coordinate& coordinate, Entity* entity);
     void loadNextEntity(const Entity* entity);
     void loadEntities(const std::vector<utils::Coordinate>& coord, Entity* entities);
-    void updateEntityInteraction(const utils::Coordinate& coord, const InteractionEntity& inter);
+    void updateInteraction(const utils::Coordinate& coord, const _interaction::Interaction& inter);
     void evaluateEntitiesMovement();
 
     void startEntitiesMovementThread();

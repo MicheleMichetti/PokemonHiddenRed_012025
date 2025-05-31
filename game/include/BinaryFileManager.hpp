@@ -17,23 +17,45 @@ trunc:      truncate	Any contents that existed in the file before it is open are
 
 class BinaryFileManager {
    private:
-    std::string filename;
+    std::string file_name;
     std::fstream stream;
     std::ios_base::openmode mode;
 
     void checkOpen();
 
    public:
-    BinaryFileManager(std::string filename, std::ios_base::openmode mode);
-    std::ios_base::openmode getMode();
-    std::string getFilename();
-    void openFile(std::ios_base::openmode mode);
+    BinaryFileManager();
+    BinaryFileManager(const std::string& file_name, const std::ios_base::openmode& mode);
+    std::ios_base::openmode getMode() const;
+    std::string getFileName() const;
+    std::fstream* getStream();
+
+    void openFile(const std::ios_base::openmode& mode);
     /**
      * Check that the stream is not failed, then closes it.
      */
     void commit();
     ~BinaryFileManager();
-    std::string readBitsAtPosition(const uint32_t& position, const uint32_t& n_bit);
+
+    /**
+     * Read a sequence of bits from the file, starting at the given position.
+     * The sequence is read as a string of '0's and '1's.
+     * @param position The position in the file to start reading from.
+     * @param n_bit The number of bits to read.
+     * @return A string containing the sequence of bits.
+     */
+    char* readBitsSequence(const uint32_t& position, const uint32_t& n_bit);
+    uint8_t readBitsSequence(uint8_t& output, const uint32_t& position, const uint32_t& n_bit);
+    uint16_t readBitsSequence(uint16_t& output, const uint32_t& position, const uint32_t& n_bit);
+    uint32_t readBitsSequence(uint32_t& output, const uint32_t& position, const uint32_t& n_bit);
+    uint64_t readBitsSequence(uint64_t& output, const uint32_t& position, const uint32_t& n_bit);
+    std::string readBitsSequence(std::string& output, const uint32_t& position, const uint32_t& n_bit);
+    char readBitsSequence(char& output, const uint32_t& position, const uint32_t& n_bit);
+    float readBitsSequence(float& output, const uint32_t& position, const uint32_t& n_bit);
+    double readBitsSequence(double& output, const uint32_t& position, const uint32_t& n_bit);
+    bool readBitsSequence(bool& output, const uint32_t& position, const uint32_t& n_bit);
+    int readBitsSequence(int& output, const uint32_t& position, const uint32_t& n_bit);
+
     void writeBitsAtPosition(const char* target, uint32_t n_bit, uint32_t position = 0);
     void writeBitsInAppend(const char* target, const uint32_t& n_bit);
     /**

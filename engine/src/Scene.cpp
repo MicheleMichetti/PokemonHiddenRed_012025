@@ -1,5 +1,8 @@
 #include<Scene.hpp>
 
+Scene* Scene::instancePtr;
+std::mutex Scene::mtx;
+
 Scene::Scene() {
     this->choice_box_ = *(new ChoiceBox());
     this->menu_box_ = *(new MenuBox());

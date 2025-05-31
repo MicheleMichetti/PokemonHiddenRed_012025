@@ -19,4 +19,5 @@ target_compile_options(pokemon-tests PRIVATE ${GTEST_CFLAGS})
 enable_testing()
 
 target_link_libraries(pokemon-tests PRIVATE pokemon-lib)
+#[[target_link_libraries(pokemon-tests PRIVATE engine-lib)]]
 target_link_libraries(pokemon-tests PRIVATE fmt::fmt)
