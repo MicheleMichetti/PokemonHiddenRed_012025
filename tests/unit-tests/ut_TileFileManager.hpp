@@ -4,7 +4,8 @@
 
 using namespace _tileFileMng
 
-bool loadTiles(const std::string &filePath) {
+    bool
+    loadTiles(const std::string& filePath) {
     TileFileManager tileFileManager(filePath, std::ios::in | std::ios::binary);
     if (!tileFileManager.isOpen()) {
         std::cerr << "Failed to open tile file: " << filePath << std::endl;
@@ -28,6 +29,6 @@ bool loadTiles(const std::string &filePath) {
     // Return true if the file was loaded successfully
     // You can also return false if you want to indicate failure in loading the file.
     // For now, we assume the file is loaded successfully if we reach this point.
-    // Note: You may want to handle exceptions or errors in a more robust way in a real application.    
+    // Note: You may want to handle exceptions or errors in a more robust way in a real application.
     return false;
 }
