@@ -39,3 +39,5 @@ settings.json
 build/*
 external_libs/*
 BinaryGenerator/output_files
+data/*
+

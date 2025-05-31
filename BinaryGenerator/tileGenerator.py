@@ -14,7 +14,7 @@ FIELD_LENGTHS = {
 
 # Request CSV file name from the user
 FILE_NAME = sys.argv[1]
-FILE_PATH = f"{FILE_NAME}.csv"  # Full path to the input CSV file
+FILE_PATH = os.path.abspath(FILE_NAME)  # Full path to the input CSV file
 OUTPUT_DIR = "output_files"  # Directory to save the output files
 OUTPUT_FILE_PATH = os.path.join(OUTPUT_DIR, f"{FILE_NAME}.dat")  # Full path to the output text file
 
