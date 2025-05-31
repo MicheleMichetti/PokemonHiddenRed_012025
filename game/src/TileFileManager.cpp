@@ -41,7 +41,7 @@ void TileFileManager::retrieveTiles() {
         position += BITFIELD_IGM_FILENAME;
 
         std::pair key = std::make_pair(bkgd, object);
-        std::pair value = std::make_pair(Tile(object,bkgd,collision_bitmask),TileEngine(bkg_image_file_name, object_image_file_name));
+        std::pair value = std::make_pair(Tile(object, bkgd, collision_bitmask), TileEngine(bkg_image_file_name, object_image_file_name));
 
         tile_dictionary.insert(std::make_pair(key, value));
     }
