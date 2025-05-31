@@ -27,15 +27,21 @@ void TileFileManager::retrieveTiles() {
         uint8_t bkgd = 0;
         readBitsSequence(bkgd, position, BITFIELD_BKG);
         position += BITFIELD_BKG;
-        uint8_t type = 0;
-        readBitsSequence(type, position, BITFIELD_TYPE);
-        position += BITFIELD_TYPE;
-        std::string image_file_name = "";
-        readBitsSequence(image_file_name, position, BITFIELD_IGM_FILENAME);
+        uint8_t object = 0;
+        readBitsSequence(object, position, BITFIELD_OBJECT);
+        position += BITFIELD_OBJECT;
+        uint8_t collision_bitmask = 0;
+        readBitsSequence(collision_bitmask, position, COLLISION);
+        position += COLLISION;
+        std::string bkg_image_file_name = "";
+        readBitsSequence(bkg_image_file_name, position, BITFIELD_IGM_FILENAME);
+        position += BITFIELD_IGM_FILENAME;
+        std::string object_image_file_name = "";
+        readBitsSequence(object_image_file_name, position, BITFIELD_IGM_FILENAME);
         position += BITFIELD_IGM_FILENAME;
 
-        std::pair key = std::make_pair(bkgd, type);
-        std::pair value = std::make_pair(Tile(type, bkgd, 0b00000000), TileEngine(image_file_name, image_file_name));
+        std::pair key = std::make_pair(bkgd, object);
+        std::pair value = std::make_pair(Tile(object,bkgd,collision_bitmask),TileEngine(bkg_image_file_name, object_image_file_name));
 
         tile_dictionary.insert(std::make_pair(key, value));
     }

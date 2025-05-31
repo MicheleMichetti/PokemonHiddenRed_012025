@@ -4,7 +4,8 @@
 #include <map>
 
 #define BITFIELD_BKG 8
-#define BITFIELD_TYPE 8
+#define BITFIELD_OBJECT 8
+#define COLLISION 8
 #define BITFIELD_IGM_FILENAME 56
 //#define BITFIELD_INTERACT_DIR 4
 //#define BITFIELD_INTERACT_ID 32
