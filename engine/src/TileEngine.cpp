@@ -93,28 +93,28 @@ void TileEngine::drawObject() {
     al_draw_bitmap(this->object_, coordinates_.x, coordinates_.y, 0);
 }
 void TileEngine::drawTile() {
-    if(!(this->status_bitmask_ & TileStatus::Draw_Tile) ) {
-        return;
-    }
+    // if(!(this->status_bitmask_ & TileStatus::Draw_Tile) ) {
+    //     return;
+    // }
     drawBackground();
     drawObject();
 }
-void TileEngine::drawBackground(PixelCoordinates coordinate) {
+void TileEngine::drawBackground(PixelCoordinates coordinates) {
     if(!(this->status_bitmask_ & TileStatus::Draw_Bkgd) && this->background_ == nullptr) {
         return;
     }
-    al_draw_bitmap(this->background_, coordinate.x, coordinate.y, 0);
+    al_draw_bitmap(this->background_, coordinates.x, coordinates.y, 0);
 }
-void TileEngine::drawObject(PixelCoordinates coordinate) {
+void TileEngine::drawObject(PixelCoordinates coordinates) {
     if(!(this->status_bitmask_ & TileStatus::Draw_Obj) && this->object_ == nullptr) {
         return;
     }
-    al_draw_bitmap(this->object_, coordinate.x, coordinate.y, 0);
+    al_draw_bitmap(this->object_, coordinates.x, coordinates.y, 0);
 }
-void TileEngine::drawTile(PixelCoordinates coordinate) {
-    if(!(this->status_bitmask_ & TileStatus::Draw_Tile) ) {
-        return;
-    }
-    drawBackground(coordinate);
-    drawObject(coordinate);
+void TileEngine::drawTile(PixelCoordinates coordinates) {
+    // if(!(this->status_bitmask_ & TileStatus::Draw_Tile) ) {
+    //     return;
+    // }
+    drawBackground(coordinates);
+    drawObject(coordinates);
 }

@@ -38,8 +38,8 @@ class TileEngine {
         void drawBackground();
         void drawObject();
         void drawTile();
-        void drawBackground(PixelCoordinates coordinate);
-        void drawObject(PixelCoordinates coordinate);
-        void drawTile(PixelCoordinates coordinate);
+        void drawBackground(PixelCoordinates coordinates);
+        void drawObject(PixelCoordinates coordinates);
+        void drawTile(PixelCoordinates coordinates);
 
 };
