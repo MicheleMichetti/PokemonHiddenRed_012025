@@ -11,7 +11,7 @@ TileFileManager::TileFileManager(std::string file_name, const std::ios_base::ope
     std::cout << "TileFileManager constructor called with file name: " << file_name << std::endl;
 }
 
-// TileFileManager::~TileFileManager() { }
+TileFileManager::~TileFileManager() { }
 
 // std::string TileFileManager::getFileName() { return this->getFileName(); }
 

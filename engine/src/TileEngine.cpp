@@ -50,8 +50,8 @@ TileEngine::TileEngine(uint16_t ID, graphics_utils::PixelCoordinates coordinates
     
 }
 TileEngine::~TileEngine() {
-    free(this->background_);
-    free(this->object_);
+    al_destroy_bitmap(this->background_);
+    al_destroy_bitmap(this->object_);
     // delete background_;
     // delete object_;
 }

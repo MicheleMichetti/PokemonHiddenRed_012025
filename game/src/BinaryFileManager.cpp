@@ -6,14 +6,17 @@
 BinaryFileManager::BinaryFileManager() {
     this->file_name = "default_file_name.dat";
     this->mode = std::ios_base::in | std::ios_base::out | std::ios_base::binary;
-    stream.open(this->file_name, this->mode);
+    this->stream.open(this->file_name, this->mode);
     checkOpen();
 }
 
 BinaryFileManager::BinaryFileManager(const std::string& file_name, const std::ios_base::openmode& mode) {
+    if (!std::filesystem::exists(file_name)) {
+        std::cerr << "File does not exist: " << file_name << std::endl;
+    }
     this->file_name = file_name;
     this->mode = mode;
-    stream.open(file_name, mode);
+    this->stream.open(file_name, mode);
     checkOpen();
 }
 
@@ -25,31 +28,31 @@ std::fstream* BinaryFileManager::getStream() { return &this->stream; }
 
 void BinaryFileManager::openFile(const std::ios_base::openmode& mode) {
     this->mode = mode;
-    stream.open(this->file_name, mode);
+    this->stream.open(this->file_name, mode);
     checkOpen();
 }
 
 BinaryFileManager::~BinaryFileManager() {
-    if (stream.is_open()) {
-        stream.close();
+    if (this->stream.is_open()) {
+        this->stream.close();
     }
 }
 
 void BinaryFileManager::commit() {
-    if (stream.fail()) {
+    if (this->stream.fail()) {
         IOErrorMessage(("Error committing changes to file " + this->file_name).c_str());
         return;
     }
-    stream.close();
+    this->stream.close();
 }
 
 char* BinaryFileManager::readBitsSequence(const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = new char[n_bit + 1];
     read_string[n_bit] = '\0';
-    stream.seekg(position);
-    stream.read(read_string, n_bit);
+    this->stream.seekg(position);
+    this->stream.read(read_string, n_bit);
 
-    if (stream.fail()) {
+    if (this->stream.fail()) {
         IOErrorMessage(("End of file reached at position " + std::to_string(position)).c_str());
         return nullptr;
     }
@@ -128,14 +131,14 @@ int BinaryFileManager::readBitsSequence(int& output, const uint32_t& position, c
 }
 
 void BinaryFileManager::writeBitsAtPosition(const char* target, uint32_t n_bit, uint32_t position) {
-    if (!stream.is_open() && position < 0) {
+    if (!this->stream.is_open() && position < 0) {
         IOErrorMessage(("Can not write to file " + this->file_name + " at position " + std::to_string(position)).c_str());
         return;
     }
     if (position != 0) {
-        stream.seekg(position);
+        this->stream.seekg(position);
     }
-    stream.write(target, n_bit);
+    this->stream.write(target, n_bit);
 }
 
 void BinaryFileManager::writeBitsInAppend(const char* target, const uint32_t& n_bit) {
@@ -143,22 +146,22 @@ void BinaryFileManager::writeBitsInAppend(const char* target, const uint32_t& n_
         IOErrorMessage("Stream is not in append mode");
         return;
     }
-    stream.write(target, n_bit);
+    this->stream.write(target, n_bit);
 }
 
 void BinaryFileManager::writeBitsInAppend(const char* target) { writeBitsInAppend(target, strlen(target)); }
 
 void BinaryFileManager::setPermission(std::ios_base::openmode mode) {
-    std::streampos position = stream.tellg();
-    stream.close();
-    stream.open(this->file_name, mode);
+    std::streampos position = this->stream.tellg();
+    this->stream.close();
+    this->stream.open(this->file_name, mode);
     this->mode = mode;
     checkOpen();
-    stream.seekg(position);
+    this->stream.seekg(position);
 }
 
 void BinaryFileManager::checkOpen() {
-    if (!stream.is_open()) {
+    if (this->stream.is_open() == false) {
         IOErrorMessage(("File " + this->file_name + " is not open").c_str());
     }
 }
