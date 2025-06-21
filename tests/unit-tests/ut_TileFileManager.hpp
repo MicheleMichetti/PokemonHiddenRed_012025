@@ -111,11 +111,11 @@ bool printTileDictionary() {
     std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile, TileEngine>>::iterator iterator = tile_dictionary.begin();
     graphics_utils::PixelCoordinates coord(0, 0);
     while (iterator != tile_dictionary.end()) {
-            iterator->second.second.drawTile(coord);
-            coord.x += 180;
-            coord.y += 180;
-            ++iterator;
-        }
+        iterator->second.second.drawTile(coord);
+        coord.x += 180;
+        coord.y += 180;
+        ++iterator;
+    }
 
     al_flip_display();
     int a = 0;
