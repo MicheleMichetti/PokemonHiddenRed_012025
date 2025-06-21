@@ -74,41 +74,52 @@ bool printTileDictionary() {
     memset(key, 0, sizeof(key));
     al_start_timer(timer);
 
-    while (1) {
-        al_wait_for_event(queue, &event);
-        switch (event.type) {
-            case ALLEGRO_EVENT_TIMER:
-                if (key[ALLEGRO_KEY_ESCAPE]) {
-                    done = true;
-                }
-                for (int i = 0; i < ALLEGRO_KEY_MAX; i++) key[i] &= KEY_SEEN;
-                break;
-            case ALLEGRO_EVENT_KEY_DOWN:
-                key[event.keyboard.keycode] = KEY_SEEN | KEY_RELEASED;
-                break;
+    // while (1) {
+    //     al_wait_for_event(queue, &event);
+    //     switch (event.type) {
+    //         case ALLEGRO_EVENT_TIMER:
+    //             if (key[ALLEGRO_KEY_ESCAPE]) {
+    //                 done = true;
+    //             }
+    //             for (int i = 0; i < ALLEGRO_KEY_MAX; i++) key[i] &= KEY_SEEN;
+    //             break;
+    //         case ALLEGRO_EVENT_KEY_DOWN:
+    //             key[event.keyboard.keycode] = KEY_SEEN | KEY_RELEASED;
+    //             break;
 
-            case ALLEGRO_EVENT_KEY_UP:
-                key[event.keyboard.keycode] &= KEY_RELEASED;
-                break;
+    //         case ALLEGRO_EVENT_KEY_UP:
+    //             key[event.keyboard.keycode] &= KEY_RELEASED;
+    //             break;
 
-            case ALLEGRO_EVENT_DISPLAY_CLOSE:
-                done = true;
-                break;
-        }
-        if (done) {
-            break;
-        }
-        std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile, TileEngine>>::iterator iterator = tile_dictionary.begin();
-        graphics_utils::PixelCoordinates coord(0, 0);
-        while (iterator != tile_dictionary.end()) {
+    //         case ALLEGRO_EVENT_DISPLAY_CLOSE:
+    //             done = true;
+    //             break;
+    //     }
+    //     if (done) {
+    //         break;
+    //     }
+    //     std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile, TileEngine>>::iterator iterator = tile_dictionary.begin();
+    //     graphics_utils::PixelCoordinates coord(0, 0);
+    //     while (iterator != tile_dictionary.end()) {
+    //         iterator->second.second.drawTile(coord);
+    //         coord.x += 180;
+    //         coord.y += 180;
+    //         ++iterator;
+    //     }
+    // }
+
+    std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile, TileEngine>>::iterator iterator = tile_dictionary.begin();
+    graphics_utils::PixelCoordinates coord(0, 0);
+    while (iterator != tile_dictionary.end()) {
             iterator->second.second.drawTile(coord);
             coord.x += 180;
             coord.y += 180;
             ++iterator;
         }
-    }
 
     al_flip_display();
+    int a = 0;
+    std::cin >> a;  // Wait for user input to exit
     // al_rest(2.0); // Pause for 2 seconds to view the drawn tiles
     for (unsigned int i = 0; i < 1000000000000000; ++i) {
         int t = i;  // Dummy operation to keep the program running for a while
@@ -124,7 +135,7 @@ bool printTileDictionary() {
 
 TEST(getTiles, Positive) {
     std::string filePath = "data/tiles/tileSample";
-    TileFileManager tileFileManager(filePath, std::ios::out | std::ios::binary);
+    TileFileManager tileFileManager(filePath, std::ios::in | std::ios::binary);
 
     EXPECT_TRUE(getTiles(tileFileManager));
 }

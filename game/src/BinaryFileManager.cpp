@@ -52,10 +52,10 @@ char* BinaryFileManager::readBitsSequence(const uint32_t& position, const uint32
     this->stream.seekg(position);
     this->stream.read(read_string, n_bit);
 
-    if (this->stream.fail()) {
-        IOErrorMessage(("End of file reached at position " + std::to_string(position)).c_str());
-        return nullptr;
-    }
+    // if (this->stream.fail()) {
+    //     IOErrorMessage(("End of file reached at position " + std::to_string(position)).c_str());
+    //     return nullptr;
+    // }
 
     return read_string;
 }
