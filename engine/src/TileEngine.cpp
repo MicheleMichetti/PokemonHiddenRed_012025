@@ -16,18 +16,18 @@ TileEngine::TileEngine(std::string type_img_name, std::string bkgd_img_name) {
     this->ID_ = 0;
     this->status_bitmask_ = 0;
     this->coordinates_ = {0,0};
-    this->type_img_name = type_img_name;
-    this->bkgd_img_name = bkgd_img_name;
+    this->type_img_name = type_img_name+ ".png";
+    this->bkgd_img_name = bkgd_img_name+ ".png";
 
-    this->background_ = al_load_bitmap(bkgd_img_name.c_str()); //ALLEGRO_BITMAP *al_load_bitmap(const char *filename)
+    this->background_ = al_load_bitmap(this->bkgd_img_name.c_str()); //ALLEGRO_BITMAP *al_load_bitmap(const char *filename)
     if(this->background_ == nullptr) {
-        SPDLOG_ERROR("Could not load background image.");
+        SPDLOG_ERROR(("Could not load background image " + this->bkgd_img_name).c_str());
     }
     this->status_bitmask_ |= TileStatus::Draw_Bkgd;
 
-    this->object_ = al_load_bitmap(type_img_name.c_str());
+    this->object_ = al_load_bitmap(this->type_img_name.c_str());
     if(this->object_ == nullptr) {
-        SPDLOG_ERROR("Could not load object image.");
+        SPDLOG_ERROR(("Could not load object image " + this->type_img_name).c_str());
     }
     this->status_bitmask_ |= TileStatus::Draw_Obj;
     this->status_bitmask_ |= TileStatus::Draw_Tile;

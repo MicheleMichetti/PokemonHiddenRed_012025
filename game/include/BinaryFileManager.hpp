@@ -16,12 +16,24 @@ trunc:      truncate	Any contents that existed in the file before it is open are
 #define N_BIT_SEQUENCE 34 * 8;
 
 class BinaryFileManager {
-   private:
+   protected:
     std::string file_name;
     std::fstream stream;
     std::ios_base::openmode mode;
+    bool failbit = false;
 
     void checkOpen();
+    // char* convertToChar(const char *binary_string, const size_t &len) const {
+    //     //size_t len = strlen(binary_string);
+    //     char* output = new char[len + 1];
+    //     for (uint8_t position = 0; position < len*8; ++position) {
+    //         // output[i] = binary_string[i];
+    //         output[i] = output[i] | (binary_string >> position)
+    //     }
+    //     output[len] = '\0'; // Null-terminate the string
+    //     return output;
+    // }
+
 
    public:
     BinaryFileManager();

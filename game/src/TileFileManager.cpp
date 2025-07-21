@@ -23,27 +23,56 @@ TileFileManager::~TileFileManager() {}
 
 void TileFileManager::retrieveTiles() {
     uint32_t position = 0;
-    while (this->getStream()->eof() == false) {
+
+    uint8_t dummy = 0;
+
+    while (!stream.fail()) {
         uint8_t bkgd = 0;
         readBitsSequence(bkgd, position, BITFIELD_BKG);
+        if(this->stream.fail()) {
+            return;
+        }
+        //SPDLOG_DEBUG(("background ID: " + std::to_string(bkgd) + " at pos " + std::to_string(position)).c_str());
+        std::cout << "background ID: " << bkgd << " at pos " << position << std::endl;
         position += BITFIELD_BKG;
         uint8_t object = 0;
         readBitsSequence(object, position, BITFIELD_OBJECT);
+        if(this->stream.fail()) {
+            return;
+        }
+        //SPDLOG_DEBUG(("object ID: " + std::to_string(object) + " at pos " + std::to_string(position)).c_str());
+        std::cout << "object ID: " << object << " at pos " << position << std::endl;
         position += BITFIELD_OBJECT;
         uint8_t collision_bitmask = 0;
         readBitsSequence(collision_bitmask, position, COLLISION);
+        if(this->stream.fail()) {
+            return;
+        }
+        //SPDLOG_DEBUG(("collision: " + std::to_string(collision_bitmask) + " at pos " + std::to_string(position)).c_str());
+        std::cout << "collision: " << collision_bitmask << " at pos " << position << std::endl;
         position += COLLISION;
         std::string bkg_image_file_name = "";
         readBitsSequence(bkg_image_file_name, position, BITFIELD_IGM_FILENAME);
+        if(this->stream.fail()) {
+            return;
+        }
+        //SPDLOG_DEBUG(("bkg img name: " + std::to_string(bkg_image_file_name) + " at pos " + std::to_string(position)).c_str());
+        std::cout << "bkg img name: " << bkg_image_file_name << " at pos " << position << std::endl;
         position += BITFIELD_IGM_FILENAME;
         std::string object_image_file_name = "";
         readBitsSequence(object_image_file_name, position, BITFIELD_IGM_FILENAME);
+        if(this->stream.fail()) {
+            return;
+        }
+        //SPDLOG_DEBUG(("object img name: " + std::to_string(object_image_file_name) + " at pos " + std::to_string(position)).c_str());
+        std::cout << "object img name: " << object_image_file_name << " at pos " << position << std::endl;
         position += BITFIELD_IGM_FILENAME;
 
         std::pair key = std::make_pair(bkgd, object);
         std::pair value = std::make_pair(Tile(object, bkgd, collision_bitmask), TileEngine(bkg_image_file_name, object_image_file_name));
 
         tile_dictionary.insert(std::make_pair(key, value));
+
     }
 
     return;

@@ -52,12 +52,12 @@ bool readBit(const T& field, const T& n) {
 // set n-th bit
 template <class T>
 void setBit(T& number, const T& n) {
-    number&((T)1 << n);
+    number |= ((T)1 << n);
 }
 // clear n-th bit
 template <class T>
 void clearBit(T& number, const T& n) {
-    number & ~((T)1 << n);
+    number &= ~((T)1 << n);
 }
 // set n-th bit to
 template <class T>
