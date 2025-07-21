@@ -134,20 +134,18 @@ bool printTileDictionary() {
 }
 
 TEST(getTiles, Positive) {
-
     spdlog::set_level(spdlog::level::debug);
 
     std::string filePath = "data/tiles/tileSample.csv.dat";
     TileFileManager tileFileManager(filePath, std::ios::in | std::ios::binary | std::ios::app);
-    std::cout<< tileFileManager.getStream() <<std::endl;
+    std::cout << tileFileManager.getStream() << std::endl;
     int a = 0;
-    std::cin>>a;
+    std::cin >> a;
 
     EXPECT_TRUE(getTiles(tileFileManager));
 }
 
 TEST(printTileDictionary, Positive) {
-
     spdlog::set_level(spdlog::level::debug);
 
     ALLEGRO_DISPLAY* disp = al_create_display(180 * 4, 180 * 4);

@@ -34,7 +34,6 @@ class BinaryFileManager {
     //     return output;
     // }
 
-
    public:
     BinaryFileManager();
     BinaryFileManager(const std::string& file_name, const std::ios_base::openmode& mode);

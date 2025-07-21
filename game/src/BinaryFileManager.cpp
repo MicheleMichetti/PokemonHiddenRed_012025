@@ -50,7 +50,7 @@ char* BinaryFileManager::readBitsSequence(const uint32_t& position, const uint32
     char* read_string = new char[n_bit + 1];
     read_string[n_bit] = '\0';
     this->stream.seekg(position);
-    if(this->stream.fail()) {
+    if (this->stream.fail()) {
         failbit = true;
         SPDLOG_ERROR(("Failed to seek to position " + std::to_string(position) + " in file " + this->file_name).c_str());
         delete[] read_string;
@@ -69,19 +69,18 @@ char* BinaryFileManager::readBitsSequence(const uint32_t& position, const uint32
 uint8_t BinaryFileManager::readBitsSequence(uint8_t& output, const uint32_t& position, const uint32_t& n_bit) {
     output = 0;
     char* read_string = readBitsSequence(position, n_bit);
-    if(failbit == true) {
+    if (failbit == true) {
         return output;
     }
-    
-    for(uint8_t index = 0; index < n_bit; ++index) {
-        if(read_string[index] == '1')  {
+
+    for (uint8_t index = 0; index < n_bit; ++index) {
+        if (read_string[index] == '1') {
             utils::setBit<uint8_t>(output, index);
-        } 
-        else {
+        } else {
             utils::clearBit<uint8_t>(output, index);
         }
     }
-    //output = static_cast<uint8_t>(atoll(read_string));
+    // output = static_cast<uint8_t>(atoll(read_string));
     delete[] read_string;
     return output;
 }
@@ -89,19 +88,18 @@ uint8_t BinaryFileManager::readBitsSequence(uint8_t& output, const uint32_t& pos
 uint16_t BinaryFileManager::readBitsSequence(uint16_t& output, const uint32_t& position, const uint32_t& n_bit) {
     output = 0;
     char* read_string = readBitsSequence(position, n_bit);
-    if(failbit == true) {
+    if (failbit == true) {
         return output;
     }
 
-    for(uint8_t index = 0; index < n_bit; ++index) {
-        if(read_string[index] == '1')  {
+    for (uint8_t index = 0; index < n_bit; ++index) {
+        if (read_string[index] == '1') {
             utils::setBit<uint16_t>(output, index);
-        } 
-        else {
+        } else {
             utils::clearBit<uint16_t>(output, index);
         }
     }
-    //output = uint16_t(atoll(read_string));
+    // output = uint16_t(atoll(read_string));
     delete[] read_string;
     return output;
 }
@@ -109,19 +107,18 @@ uint16_t BinaryFileManager::readBitsSequence(uint16_t& output, const uint32_t& p
 uint32_t BinaryFileManager::readBitsSequence(uint32_t& output, const uint32_t& position, const uint32_t& n_bit) {
     output = 0;
     char* read_string = readBitsSequence(position, n_bit);
-    if(failbit == true) {
+    if (failbit == true) {
         return output;
     }
 
-    for(uint8_t index = 0; index < n_bit; ++index) {
-        if(read_string[index] == '1')  {
+    for (uint8_t index = 0; index < n_bit; ++index) {
+        if (read_string[index] == '1') {
             utils::setBit<uint32_t>(output, index);
-        } 
-        else {
+        } else {
             utils::clearBit<uint32_t>(output, index);
         }
     }
-    //output = uint32_t(atoll(read_string));
+    // output = uint32_t(atoll(read_string));
     delete[] read_string;
     return output;
 }
@@ -129,19 +126,18 @@ uint32_t BinaryFileManager::readBitsSequence(uint32_t& output, const uint32_t& p
 uint64_t BinaryFileManager::readBitsSequence(uint64_t& output, const uint32_t& position, const uint32_t& n_bit) {
     output = 0;
     char* read_string = readBitsSequence(position, n_bit);
-    if(failbit == true) {
+    if (failbit == true) {
         return output;
     }
 
-    for(uint8_t index = 0; index < n_bit; ++index) {
-        if(read_string[index] == '1')  {
+    for (uint8_t index = 0; index < n_bit; ++index) {
+        if (read_string[index] == '1') {
             utils::setBit<uint64_t>(output, index);
-        } 
-        else {
+        } else {
             utils::clearBit<uint64_t>(output, index);
         }
     }
-    //output = uint64_t(atoll(read_string));
+    // output = uint64_t(atoll(read_string));
     delete[] read_string;
     return output;
 }
@@ -149,16 +145,16 @@ uint64_t BinaryFileManager::readBitsSequence(uint64_t& output, const uint32_t& p
 std::string BinaryFileManager::readBitsSequence(std::string& output, const uint32_t& position, const uint32_t& n_bit) {
     output = '\0';
     char* read_string = readBitsSequence(position, n_bit);
-    if(failbit == true) {
+    if (failbit == true) {
         return output;
     }
 
     uint8_t aux_value = 0;
-    char* aux_output = new char[n_bit/8 + 1];
-    aux_output[n_bit/8] = '\0'; // Null-terminate the string
-    for(int index = 0; index < (n_bit/8); ++index) {
-        for(int bit_index = 0; bit_index < 8; ++bit_index) {
-            if(read_string[index * 8 + bit_index] == '1') {
+    char* aux_output = new char[n_bit / 8 + 1];
+    aux_output[n_bit / 8] = '\0';  // Null-terminate the string
+    for (int index = 0; index < (n_bit / 8); ++index) {
+        for (int bit_index = 0; bit_index < 8; ++bit_index) {
+            if (read_string[index * 8 + bit_index] == '1') {
                 utils::setBit<uint8_t>(aux_value, bit_index);
             } else {
                 utils::clearBit<uint8_t>(aux_value, bit_index);
@@ -174,17 +170,17 @@ std::string BinaryFileManager::readBitsSequence(std::string& output, const uint3
 
 char BinaryFileManager::readBitsSequence(char& output, const uint32_t& position, const uint32_t& n_bit) {
     output = *(readBitsSequence(position, n_bit));
-    if(failbit == true) {
-        output = '\0'; // or handle error as needed
+    if (failbit == true) {
+        output = '\0';  // or handle error as needed
         return output;
     }
-    return output+'\0'; // Null-terminate the string to ensure it is a valid C-style string
+    return output + '\0';  // Null-terminate the string to ensure it is a valid C-style string
 }
 
 float BinaryFileManager::readBitsSequence(float& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
-    if(failbit == true) {
-        output = 0.; // or handle error as needed
+    if (failbit == true) {
+        output = 0.;  // or handle error as needed
         return output;
     }
     output = atof(read_string);
@@ -194,8 +190,8 @@ float BinaryFileManager::readBitsSequence(float& output, const uint32_t& positio
 
 double BinaryFileManager::readBitsSequence(double& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
-    if(failbit == true) {
-        output = 0.; // or handle error as needed
+    if (failbit == true) {
+        output = 0.;  // or handle error as needed
         return output;
     }
     uint32_t shift = sizeof(double) * 8 / sizeof(char);
@@ -207,8 +203,8 @@ double BinaryFileManager::readBitsSequence(double& output, const uint32_t& posit
 
 bool BinaryFileManager::readBitsSequence(bool& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
-    if(failbit == true) {
-        output = false; // or handle error as needed
+    if (failbit == true) {
+        output = false;  // or handle error as needed
         return output;
     }
     output = utils::readBit<bool>(read_string, 0);
@@ -218,8 +214,8 @@ bool BinaryFileManager::readBitsSequence(bool& output, const uint32_t& position,
 
 int BinaryFileManager::readBitsSequence(int& output, const uint32_t& position, const uint32_t& n_bit) {
     char* read_string = readBitsSequence(position, n_bit);
-    if(failbit == true) {
-        output = 0; // or handle error as needed
+    if (failbit == true) {
+        output = 0;  // or handle error as needed
         return output;
     }
     output = atoi(read_string);
