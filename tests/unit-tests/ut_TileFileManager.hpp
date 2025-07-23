@@ -118,8 +118,8 @@ bool printTileDictionary() {
     }
 
     al_flip_display();
-    int a = 0;
-    std::cin >> a;  // Wait for user input to exit
+    // int a = 0;
+    // std::cin >> a;  // Wait for user input to exit
     // al_rest(2.0); // Pause for 2 seconds to view the drawn tiles
     for (unsigned int i = 0; i < 1000000000000000; ++i) {
         int t = i;  // Dummy operation to keep the program running for a while
@@ -139,8 +139,8 @@ TEST(getTiles, Positive) {
     std::string filePath = "data/tiles/tileSample.csv.dat";
     TileFileManager tileFileManager(filePath, std::ios::in | std::ios::binary | std::ios::app);
     std::cout << tileFileManager.getStream() << std::endl;
-    int a = 0;
-    std::cin >> a;
+    // int a = 0;
+    // std::cin >> a;
 
     EXPECT_TRUE(getTiles(tileFileManager));
 }
