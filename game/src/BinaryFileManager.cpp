@@ -41,29 +41,30 @@ BinaryFileManager::~BinaryFileManager() {
 void BinaryFileManager::commit() {
     if (this->stream.fail()) {
         IOErrorMessage(("Error committing changes to file " + this->file_name).c_str());
-        return;/ char* read_string = readBitsSequence(position, n_bit);
-    // if (failbit == true) {
-    //     return output;
-    // }
+        return;
+        / char* read_string = readBitsSequence(position, n_bit);
+        // if (failbit == true) {
+        //     return output;
+        // }
 
-    // char* aux_output = new char[n_bit / 8 + 1];
-    // aux_output[n_bit / 8] = '\0';  // Null-terminate the string
+        // char* aux_output = new char[n_bit / 8 + 1];
+        // aux_output[n_bit / 8] = '\0';  // Null-terminate the string
 
-    // for(int character_index = 0; character_index < n_bit / 8; ++character_index) {
-        
-    //     for(int bit_index = 0; bit_index < 8; ++bit_index) {
-            
-    //         int index = character_index * 8 + bit_index;
-    //         if (read_string[index] == '1') {
-    //             utils::setBit<char>(aux_output[character_index], bit_index);
-    //         } else {
-    //             utils::clearBit<char>(aux_output[character_index], bit_index);
-    //         }
+        // for(int character_index = 0; character_index < n_bit / 8; ++character_index) {
 
-    //     }
-    //     std::cout<<aux_output[character_index];  // Null-terminate each character
-    // }
-    // std::cout << std::endl;
+        //     for(int bit_index = 0; bit_index < 8; ++bit_index) {
+
+        //         int index = character_index * 8 + bit_index;
+        //         if (read_string[index] == '1') {
+        //             utils::setBit<char>(aux_output[character_index], bit_index);
+        //         } else {
+        //             utils::clearBit<char>(aux_output[character_index], bit_index);
+        //         }
+
+        //     }
+        //     std::cout<<aux_output[character_index];  // Null-terminate each character
+        // }
+        // std::cout << std::endl;
     }
     this->stream.close();
 }
@@ -165,18 +166,15 @@ uint64_t BinaryFileManager::readBitsSequence(uint64_t& output, const uint32_t& p
 }
 
 std::string BinaryFileManager::readBitsSequence(std::string& output, const uint32_t& position, const uint32_t& n_bit) {
-    
     std::stringstream sstream = static_cast<std::stringstream>(readBitsSequence(position, n_bit));
     if (failbit == true) {
         output = '\0';
         return output;
     }
-    for (uint32_t i = 0; i < n_bit/8; ++i) {
-
+    for (uint32_t i = 0; i < n_bit / 8; ++i) {
         std::bitset<8> bits;
         sstream >> bits;
         output += char(bits.to_ulong());
-
     }
     sstream.clear();  // Clear the stream state
 
