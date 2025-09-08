@@ -1,0 +1,26 @@
+name: Pull-Request-Checks
+
+run-name: Pull request to ${{ inputs.deploy_target }} by @${{ github.actor }}
+
+on:
+  push:
+    branches: [ develop ]
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+    - name: Build docker image
+      run: docker-compose build
+    - name: Cache project dependencies image
+      id: cache-project-dependencies
+      uses: actions/cache@v4
+      with:
+        path: .github/build-caching
+        key: ${{ runner.os }}-project-dependencies
+    - name: Run tests
+      run: docker-compose run test
