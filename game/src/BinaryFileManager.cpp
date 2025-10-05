@@ -42,10 +42,10 @@ void BinaryFileManager::commit() {
     if (this->stream.fail()) {
         IOErrorMessage(("Error committing changes to file " + this->file_name).c_str());
         return;
-        //char* read_string = readBitsSequence(position, n_bit);
-        // if (failbit == true) {
-        //     return output;
-        // }
+        // char* read_string = readBitsSequence(position, n_bit);
+        //  if (failbit == true) {
+        //      return output;
+        //  }
 
         // char* aux_output = new char[n_bit / 8 + 1];
         // aux_output[n_bit / 8] = '\0';  // Null-terminate the string

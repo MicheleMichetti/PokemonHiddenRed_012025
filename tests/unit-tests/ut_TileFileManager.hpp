@@ -59,14 +59,17 @@ bool printTileDictionary() {
     ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
     // timer and an event queue to ensure the game runs at a consistent speed
     ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
-    ALLEGRO_DISPLAY* disp = al_create_display(640,480);
+    ALLEGRO_DISPLAY* disp = al_create_display(640, 480);
     ALLEGRO_FONT* font = al_create_builtin_font();
 
     // Allegro can read in various font formats (including TTF) - but for simplicity's sake, we've used the built-in pixel font that comes with it.
     // TTF link https://liballeg.org/a5docs/trunk/font.html#ttf-fonts
-    al_register_event_source(queue, al_get_keyboard_event_source()); printf("Registered keyboard event source\n");
-    al_register_event_source(queue, al_get_display_event_source(disp)); printf("Registered display event source\n");
-    al_register_event_source(queue, al_get_timer_event_source(timer)); printf("Registered timer event source\n");
+    al_register_event_source(queue, al_get_keyboard_event_source());
+    printf("Registered keyboard event source\n");
+    al_register_event_source(queue, al_get_display_event_source(disp));
+    printf("Registered display event source\n");
+    al_register_event_source(queue, al_get_timer_event_source(timer));
+    printf("Registered timer event source\n");
 
     bool done = false;
     bool redraw = false;
@@ -116,9 +119,7 @@ bool printTileDictionary() {
                 ++iterator;
             }
             al_flip_display();
-
         }
-
     }
 
     std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile, TileEngine>>::iterator iterator = tile_dictionary.begin();
@@ -181,8 +182,7 @@ TEST(printTileDictionary, Positive) {
     // bool done = false;
     // ALLEGRO_EVENT event;
 
-
     EXPECT_TRUE(printTileDictionary());
 
-    //al_destroy_display(disp);
+    // al_destroy_display(disp);
 }
