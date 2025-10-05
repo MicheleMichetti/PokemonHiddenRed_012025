@@ -84,7 +84,7 @@ try:
 
             # Append the binary data to the output file
             with open(OUTPUT_FILE_PATH, "a", encoding="utf-8") as output_file:
-                output_file.write(binary_data + "\n")  # Add a newline after each binary string
+                output_file.write(binary_data)  # Add a newline after each binary string
 
     print(f"File saved as: {OUTPUT_FILE_PATH}")  # Print the path of the saved file
 

@@ -2,6 +2,8 @@
 
 #include <cstdint>
 #include <string>
+#include <filesystem>
+
 #include<graphics_utils.hpp>
 
 using namespace graphics_utils;
@@ -16,6 +18,7 @@ class TileEngine {
         uint8_t status_bitmask_;
         ALLEGRO_BITMAP* background_;
         ALLEGRO_BITMAP* object_;
+        std::string tileFilesPath = std::string(std::filesystem::current_path())+std::string("/data/tiles/");
 
     public:
         TileEngine();

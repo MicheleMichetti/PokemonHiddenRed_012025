@@ -47,6 +47,7 @@ bool getTiles(TileFileManager& tile_file_manager) {
 }
 
 bool printTileDictionary() {
+    printf("Printing tile dictionary...\n");
     al_init();
     al_install_keyboard();
 
@@ -58,55 +59,67 @@ bool printTileDictionary() {
     ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
     // timer and an event queue to ensure the game runs at a consistent speed
     ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
-    ALLEGRO_DISPLAY* disp = al_create_display(180 * 4, 180 * 4);
+    ALLEGRO_DISPLAY* disp = al_create_display(640,480);
     ALLEGRO_FONT* font = al_create_builtin_font();
 
     // Allegro can read in various font formats (including TTF) - but for simplicity's sake, we've used the built-in pixel font that comes with it.
     // TTF link https://liballeg.org/a5docs/trunk/font.html#ttf-fonts
-    al_register_event_source(queue, al_get_keyboard_event_source());
-    al_register_event_source(queue, al_get_display_event_source(disp));
-    al_register_event_source(queue, al_get_timer_event_source(timer));
+    al_register_event_source(queue, al_get_keyboard_event_source()); printf("Registered keyboard event source\n");
+    al_register_event_source(queue, al_get_display_event_source(disp)); printf("Registered display event source\n");
+    al_register_event_source(queue, al_get_timer_event_source(timer)); printf("Registered timer event source\n");
 
     bool done = false;
+    bool redraw = false;
     ALLEGRO_EVENT event;
 
+    al_flip_display();
+    al_rest(10.0);
+    al_clear_to_color(al_map_rgb(0, 0, 0));  // Clear the display
+    al_flip_display();
     unsigned char key[ALLEGRO_KEY_MAX];
     memset(key, 0, sizeof(key));
     al_start_timer(timer);
 
-    // while (1) {
-    //     al_wait_for_event(queue, &event);
-    //     switch (event.type) {
-    //         case ALLEGRO_EVENT_TIMER:
-    //             if (key[ALLEGRO_KEY_ESCAPE]) {
-    //                 done = true;
-    //             }
-    //             for (int i = 0; i < ALLEGRO_KEY_MAX; i++) key[i] &= KEY_SEEN;
-    //             break;
-    //         case ALLEGRO_EVENT_KEY_DOWN:
-    //             key[event.keyboard.keycode] = KEY_SEEN | KEY_RELEASED;
-    //             break;
+    while (1) {
+        al_wait_for_event(queue, &event);
+        switch (event.type) {
+            case ALLEGRO_EVENT_TIMER:
+                if (key[ALLEGRO_KEY_ESCAPE]) {
+                    done = true;
+                }
+                for (int i = 0; i < ALLEGRO_KEY_MAX; i++) key[i] &= KEY_SEEN;
+                break;
+            case ALLEGRO_EVENT_KEY_DOWN:
+                key[event.keyboard.keycode] = KEY_SEEN | KEY_RELEASED;
+                break;
 
-    //         case ALLEGRO_EVENT_KEY_UP:
-    //             key[event.keyboard.keycode] &= KEY_RELEASED;
-    //             break;
+            case ALLEGRO_EVENT_KEY_UP:
+                key[event.keyboard.keycode] &= KEY_RELEASED;
+                break;
 
-    //         case ALLEGRO_EVENT_DISPLAY_CLOSE:
-    //             done = true;
-    //             break;
-    //     }
-    //     if (done) {
-    //         break;
-    //     }
-    //     std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile, TileEngine>>::iterator iterator = tile_dictionary.begin();
-    //     graphics_utils::PixelCoordinates coord(0, 0);
-    //     while (iterator != tile_dictionary.end()) {
-    //         iterator->second.second.drawTile(coord);
-    //         coord.x += 180;
-    //         coord.y += 180;
-    //         ++iterator;
-    //     }
-    // }
+            case ALLEGRO_EVENT_DISPLAY_CLOSE:
+                done = true;
+                break;
+        }
+        if (done) {
+            break;
+        }
+        if (redraw && al_is_event_queue_empty(queue)) {
+            redraw = false;
+            al_clear_to_color(al_map_rgb(0, 0, 0));  // Clear the display
+            std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile, TileEngine>>::iterator iterator = tile_dictionary.begin();
+            graphics_utils::PixelCoordinates coord(0, 0);
+            while (iterator != tile_dictionary.end()) {
+                iterator->second.second.drawTile(coord);
+                coord.x += 180;
+                coord.y += 180;
+                ++iterator;
+            }
+            al_flip_display();
+
+        }
+
+    }
 
     std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile, TileEngine>>::iterator iterator = tile_dictionary.begin();
     graphics_utils::PixelCoordinates coord(0, 0);
@@ -148,9 +161,28 @@ TEST(getTiles, Positive) {
 TEST(printTileDictionary, Positive) {
     spdlog::set_level(spdlog::level::debug);
 
-    ALLEGRO_DISPLAY* disp = al_create_display(180 * 4, 180 * 4);
+    // // allegro initialization
+    // al_init();
+    // al_install_keyboard();
+    // // timer and an event queue to ensure the game runs at a consistent speed
+    // ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
+    // ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
+    // // creating display
+    // ALLEGRO_DISPLAY* disp = al_create_display(180 * 4, 180 * 4);
+    // // create font (probably unnecessary)
+    // ALLEGRO_FONT* font = al_create_builtin_font();
+    // // Allegro can read in various font formats (including TTF) - but for simplicity's sake, we've used the built-in pixel font that comes with it.
+    // // TTF link https://liballeg.org/a5docs/trunk/font.html#
+    // al_register_event_source(queue, al_get_keyboard_event_source());
+    // al_register_event_source(queue, al_get_display_event_source(disp));
+    // al_register_event_source(queue, al_get_timer_event_source(timer));
+
+    // bool redraw = False;
+    // bool done = false;
+    // ALLEGRO_EVENT event;
+
 
     EXPECT_TRUE(printTileDictionary());
 
-    al_destroy_display(disp);
+    //al_destroy_display(disp);
 }

@@ -25,3 +25,5 @@ RUN apt-get install libgtest-dev -y
 RUN apt-get install libspdlog-dev -y
 
 WORKDIR /pokemon_game
+
+COPY data/ ./

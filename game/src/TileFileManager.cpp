@@ -33,7 +33,7 @@ void TileFileManager::retrieveTiles() {
             return;
         }
         // SPDLOG_DEBUG(("background ID: " + std::to_string(bkgd) + " at pos " + std::to_string(position)).c_str());
-        std::cout << "background ID: " << bkgd << " at pos " << position << std::endl;
+        printf(("background ID: %u at pos %u\n"), bkgd, position);
         position += BITFIELD_BKG;
         uint8_t object = 0;
         readBitsSequence(object, position, BITFIELD_OBJECT);
@@ -41,7 +41,7 @@ void TileFileManager::retrieveTiles() {
             return;
         }
         // SPDLOG_DEBUG(("object ID: " + std::to_string(object) + " at pos " + std::to_string(position)).c_str());
-        std::cout << "object ID: " << object << " at pos " << position << std::endl;
+        printf(("object ID: %u at pos %u\n"), object, position);
         position += BITFIELD_OBJECT;
         uint8_t collision_bitmask = 0;
         readBitsSequence(collision_bitmask, position, COLLISION);
@@ -49,7 +49,7 @@ void TileFileManager::retrieveTiles() {
             return;
         }
         // SPDLOG_DEBUG(("collision: " + std::to_string(collision_bitmask) + " at pos " + std::to_string(position)).c_str());
-        std::cout << "collision: " << collision_bitmask << " at pos " << position << std::endl;
+        printf(("collision: %u at pos %u\n"), collision_bitmask, position);
         position += COLLISION;
         std::string bkg_image_file_name = "";
         readBitsSequence(bkg_image_file_name, position, BITFIELD_IGM_FILENAME);
@@ -57,7 +57,7 @@ void TileFileManager::retrieveTiles() {
             return;
         }
         // SPDLOG_DEBUG(("bkg img name: " + std::to_string(bkg_image_file_name) + " at pos " + std::to_string(position)).c_str());
-        std::cout << "bkg img name: " << bkg_image_file_name << " at pos " << position << std::endl;
+        printf(("bkg img name: %s at pos %u\n"), bkg_image_file_name.c_str(), position);
         position += BITFIELD_IGM_FILENAME;
         std::string object_image_file_name = "";
         readBitsSequence(object_image_file_name, position, BITFIELD_IGM_FILENAME);
@@ -65,7 +65,7 @@ void TileFileManager::retrieveTiles() {
             return;
         }
         // SPDLOG_DEBUG(("object img name: " + std::to_string(object_image_file_name) + " at pos " + std::to_string(position)).c_str());
-        std::cout << "object img name: " << object_image_file_name << " at pos " << position << std::endl;
+        printf(("object img name: %s at pos %u\n"), object_image_file_name.c_str(), position);
         position += BITFIELD_IGM_FILENAME;
 
         std::pair key = std::make_pair(bkgd, object);

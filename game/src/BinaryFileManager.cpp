@@ -42,7 +42,7 @@ void BinaryFileManager::commit() {
     if (this->stream.fail()) {
         IOErrorMessage(("Error committing changes to file " + this->file_name).c_str());
         return;
-        / char* read_string = readBitsSequence(position, n_bit);
+        //char* read_string = readBitsSequence(position, n_bit);
         // if (failbit == true) {
         //     return output;
         // }

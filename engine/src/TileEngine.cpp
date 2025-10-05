@@ -16,8 +16,8 @@ TileEngine::TileEngine(std::string type_img_name, std::string bkgd_img_name) {
     this->ID_ = 0;
     this->status_bitmask_ = 0;
     this->coordinates_ = {0,0};
-    this->type_img_name = type_img_name+ ".png";
-    this->bkgd_img_name = bkgd_img_name+ ".png";
+    this->type_img_name = this->tileFilesPath + type_img_name + ".png";
+    this->bkgd_img_name = this->tileFilesPath + bkgd_img_name + ".png";
 
     this->background_ = al_load_bitmap(this->bkgd_img_name.c_str()); //ALLEGRO_BITMAP *al_load_bitmap(const char *filename)
     if(this->background_ == nullptr) {
