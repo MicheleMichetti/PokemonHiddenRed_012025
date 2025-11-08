@@ -59,10 +59,10 @@ bool printTileDictionary() {
     ALLEGRO_TIMER* timer = al_create_timer(1.0 / 30.0);
     // timer and an event queue to ensure the game runs at a consistent speed
     ALLEGRO_EVENT_QUEUE* queue = al_create_event_queue();
-    ALLEGRO_DISPLAY* disp = al_create_display(640,480);
-    if(!disp) {
-      fprintf(stderr, "failed to create display!\n");
-      return -1;
+    ALLEGRO_DISPLAY* disp = al_create_display(640, 480);
+    if (!disp) {
+        fprintf(stderr, "failed to create display!\n");
+        return -1;
     }
     al_set_window_position(disp, 300, 300);
     ALLEGRO_FONT* font = al_create_builtin_font();
