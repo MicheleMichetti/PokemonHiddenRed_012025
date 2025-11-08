@@ -4,6 +4,8 @@ services:
     entrypoint: bash
     <<: &default # Define named block: default
       image: pokemon-image
+      environment:
+        - DISPLAY=${DISPLAY}
       volumes: 
       - .:/pokemon_game
 

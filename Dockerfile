@@ -24,6 +24,27 @@ RUN apt-get install pkgconf -y
 RUN apt-get install libgtest-dev -y
 RUN apt-get install libspdlog-dev -y
 
-WORKDIR /pokemon_game
+# Install vnc, xvfb in order to create a 'fake' display and firefox
+# RUN     apt-get install -y x11vnc xvfb firefox
+RUN     apt-get install -y x11-apps
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+RUN     apt-get install -y x11vnc
+#RUN     apt-get install -y x11
+# RUN     mkdir ~/.vnc
+
+RUN export uid=michele gid=michele && \
+    mkdir -p /home/michele && \
+    echo "michele:x:${uid}:${gid}:Michele,,,:/home/michele:/bin/bash" >> /etc/passwd && \
+    echo "michele:x:${uid}:" >> /etc/group && \
+    echo "michele ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/michele && \
+    chmod 0440 /etc/sudoers.d/michele && \
+    chown ${uid}:${gid} -R /home/michele
+
+USER michele
+ENV HOME=/home/michele
+WORKDIR /home/michele
+
+#WORKDIR /pokemon_game
 
 COPY data/ ./
