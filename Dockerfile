@@ -33,18 +33,21 @@ RUN     apt-get install -y x11vnc
 #RUN     apt-get install -y x11
 # RUN     mkdir ~/.vnc
 
-RUN export uid=michele gid=michele && \
-    mkdir -p /home/michele && \
-    echo "michele:x:${uid}:${gid}:Michele,,,:/home/michele:/bin/bash" >> /etc/passwd && \
-    echo "michele:x:${uid}:" >> /etc/group && \
-    echo "michele ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/michele && \
-    chmod 0440 /etc/sudoers.d/michele && \
-    chown ${uid}:${gid} -R /home/michele
+# RUN display=:1 xvfb-run --server-args="-screen 0 1024x768x24" x11-apps &
+CMD ["bash", "-lc", "xvfb :1 -screen 0 1024x768x24 -ac & export DISPLAY=:1 && exec bash"]
 
-USER michele
-ENV HOME=/home/michele
-WORKDIR /home/michele
+# RUN export uid=michele gid=michele && \
+#     mkdir -p /home/michele && \
+#     echo "michele:x:${uid}:${gid}:Michele,,,:/home/michele:/bin/bash" >> /etc/passwd && \
+#     echo "michele:x:${uid}:" >> /etc/group && \
+#     echo "michele ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/michele && \
+#     chmod 0440 /etc/sudoers.d/michele && \
+#     chown ${uid}:${gid} -R /home/michele
 
-#WORKDIR /pokemon_game
+# USER michele
+# ENV HOME=/home/michele
+# WORKDIR /home/michele
+
+WORKDIR /pokemon_game
 
 COPY data/ ./
