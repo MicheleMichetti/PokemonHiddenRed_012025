@@ -64,7 +64,7 @@ bool printTileDictionary() {
         fprintf(stderr, "failed to create display!\n");
         return -1;
     }
-    //al_set_window_position(disp, 300, 300);
+    // al_set_window_position(disp, 300, 300);
     ALLEGRO_FONT* font = al_create_builtin_font();
 
     // Allegro can read in various font formats (including TTF) - but for simplicity's sake, we've used the built-in pixel font that comes with it.
@@ -114,11 +114,11 @@ bool printTileDictionary() {
                     key_str = 'S';
                     redraw = true;
                 }
-                if(key[ALLEGRO_KEY_A]){
+                if (key[ALLEGRO_KEY_A]) {
                     key_str = 'A';
                     redraw = true;
                 }
-                if(key[ALLEGRO_KEY_B]){
+                if (key[ALLEGRO_KEY_B]) {
                     key_str = 'B';
                     redraw = true;
                 }
