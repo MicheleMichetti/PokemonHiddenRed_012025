@@ -51,3 +51,5 @@ CMD ["bash", "-lc", "xvfb :1 -screen 0 1024x768x24 -ac & export DISPLAY=:1 && ex
 WORKDIR /pokemon_game
 
 COPY data/ ./
+COPY data/tiles/ data/tiles/
+COPY data/tiles/*.* data/tiles/*

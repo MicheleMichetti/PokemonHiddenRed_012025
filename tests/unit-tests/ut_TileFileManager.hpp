@@ -64,7 +64,7 @@ bool printTileDictionary() {
         fprintf(stderr, "failed to create display!\n");
         return -1;
     }
-    al_set_window_position(disp, 300, 300);
+    //al_set_window_position(disp, 300, 300);
     ALLEGRO_FONT* font = al_create_builtin_font();
 
     // Allegro can read in various font formats (including TTF) - but for simplicity's sake, we've used the built-in pixel font that comes with it.
@@ -88,21 +88,54 @@ bool printTileDictionary() {
     memset(key, 0, sizeof(key));
     al_start_timer(timer);
 
+    char key_str = 'R';
+
     while (1) {
         al_wait_for_event(queue, &event);
         switch (event.type) {
             case ALLEGRO_EVENT_TIMER:
-                if (key[ALLEGRO_KEY_ESCAPE]) {
+                if (key[ALLEGRO_KEY_UP]) {
+                    key_str = 'U';
+                    redraw = true;
+                }
+                if (key[ALLEGRO_KEY_DOWN]) {
+                    key_str = 'D';
+                    redraw = true;
+                }
+                if (key[ALLEGRO_KEY_RIGHT]) {
+                    key_str = 'R';
+                    redraw = true;
+                }
+                if (key[ALLEGRO_KEY_LEFT]) {
+                    key_str = 'L';
+                    redraw = true;
+                }
+                if (key[ALLEGRO_KEY_S]) {
+                    key_str = 'S';
+                    redraw = true;
+                }
+                if(key[ALLEGRO_KEY_A]){
+                    key_str = 'A';
+                    redraw = true;
+                }
+                if(key[ALLEGRO_KEY_B]){
+                    key_str = 'B';
+                    redraw = true;
+                }
+                if (key[ALLEGRO_KEY_E]) {
+                    key_str = 'E';
                     done = true;
                 }
                 for (int i = 0; i < ALLEGRO_KEY_MAX; i++) key[i] &= KEY_SEEN;
                 break;
             case ALLEGRO_EVENT_KEY_DOWN:
                 key[event.keyboard.keycode] = KEY_SEEN | KEY_RELEASED;
+                printf("Key down event: %d\n", event.keyboard.keycode);
                 break;
 
             case ALLEGRO_EVENT_KEY_UP:
                 key[event.keyboard.keycode] &= KEY_RELEASED;
+                printf("Key up event: %d\n", event.keyboard.keycode);
                 break;
 
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -110,42 +143,30 @@ bool printTileDictionary() {
                 break;
         }
         if (done) {
+            printf("Exiting\n");
             break;
         }
         if (redraw && al_is_event_queue_empty(queue)) {
+            printf("Redrawing...\n");
             redraw = false;
             al_clear_to_color(al_map_rgb(0, 0, 0));  // Clear the display
+            printf("Display cleared");
             std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile, TileEngine>>::iterator iterator = tile_dictionary.begin();
             graphics_utils::PixelCoordinates coord(0, 0);
+            printf("Initial coord set to (%d,%d)\n", coord.x, coord.y);
             while (iterator != tile_dictionary.end()) {
+                printf("Drawing at coord (%d,%d)\n", coord.x, coord.y);
                 iterator->second.second.drawTile(coord);
                 coord.x += 180;
                 coord.y += 180;
                 ++iterator;
             }
+            printf("Key pressed: %c\n", key_str);
             al_flip_display();
         }
     }
 
-    std::map<std::pair<uint8_t, uint8_t>, std::pair<Tile, TileEngine>>::iterator iterator = tile_dictionary.begin();
-    graphics_utils::PixelCoordinates coord(0, 0);
-    while (iterator != tile_dictionary.end()) {
-        iterator->second.second.drawTile(coord);
-        coord.x += 180;
-        coord.y += 180;
-        ++iterator;
-    }
-
-    al_flip_display();
-    // int a = 0;
-    // std::cin >> a;  // Wait for user input to exit
-    // al_rest(2.0); // Pause for 2 seconds to view the drawn tiles
-    for (unsigned int i = 0; i < 1000000000000000; ++i) {
-        int t = i;  // Dummy operation to keep the program running for a while
-        if (i % 100000000 == 0) {
-            al_flip_display();  // Update the display every 100 million iterations
-        }
-    }
+    printf("Tile dictionary drawn. Exiting\n");
     al_clear_to_color(al_map_rgb(0, 0, 0));        // Clear the display
     al_destroy_display(al_get_current_display());  // Destroy the display
 
