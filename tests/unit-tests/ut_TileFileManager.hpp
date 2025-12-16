@@ -22,7 +22,7 @@ bool getTiles(TileFileManager& tile_file_manager) {
     size_t size = tile_dictionary.size();
     printf("Tile dictionary size: %zu\n", size);
     int a = 0;
-    std::cin>>a;
+    std::cin >> a;
 
     for (size_t i = 0; i < size; ++i) {
         std::pair<uint8_t, uint8_t> key(i, 0);
