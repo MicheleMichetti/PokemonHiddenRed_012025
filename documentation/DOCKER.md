@@ -12,7 +12,7 @@ $ export XAUTHORITY=${XAUTHORITY:-$HOME/.Xauthority}
 $ sudo docker compose run --rm -it -e DISPLAY="$DISPLAY" -e XAUTHORITY="$XAUTHORITY" -v /tmp/.X11-unix:/tmp/.X11-unix -v "$XAUTHORITY:$XAUTHORITY" play
 ```
 
-### Running the changes
+### Running the tests
 ```bash
 $ docker compose run test
 ```

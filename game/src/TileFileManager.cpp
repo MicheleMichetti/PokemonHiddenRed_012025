@@ -24,8 +24,6 @@ TileFileManager::~TileFileManager() {}
 void TileFileManager::retrieveTiles() {
     uint32_t position = 0;
 
-    uint8_t dummy = 0;
-
     while (!stream.fail()) {
         uint8_t bkgd = 0;
         readBitsSequence(bkgd, position, BITFIELD_BKG);

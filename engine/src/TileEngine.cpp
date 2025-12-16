@@ -19,6 +19,8 @@ TileEngine::TileEngine(std::string type_img_name, std::string bkgd_img_name) {
     this->type_img_name = this->tileFilesPath + type_img_name + ".png";
     this->bkgd_img_name = this->tileFilesPath + bkgd_img_name + ".png";
 
+    printf("tileFilesPath = %s\n",tileFilesPath.c_str());
+
     this->background_ = al_load_bitmap(this->bkgd_img_name.c_str()); //ALLEGRO_BITMAP *al_load_bitmap(const char *filename)
     if(this->background_ == nullptr) {
         SPDLOG_ERROR(("Could not load background image " + this->bkgd_img_name).c_str());
